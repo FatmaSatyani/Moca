@@ -1,0 +1,27 @@
+MOCA
+Skenario Unit Testing ViewModel
+1. DetailViewModelTest
+   -) Memuat Detail:
+	- Memastikan data detail tidak null
+	- Memastikan data detail sesuai dengan yang diharapkan
+2. MovieViewModelTest
+   -) Memuat Detail Movie:
+	- Memastikan data detail movie tidak null
+	- Memastikan data detail sesuai dengan yang diharapkan
+3. TvShowViewModelTest
+   -) Memuat Detail TvShow:
+	- Memastikan data detail tvshow tidak null
+	- Memastikan data detail tvshow sesuai dengan yang diharapkan
+
+Skenario Instrumental Testing ViewModel
+1. HomeActivity
+   -) Menampilkan data movie
+	- Memastikan rv_movies dalam keadaan tampil
+   -) Menampilkan data detail movie
+	- Memberi tindakan klik pada data pertama di rv_movies
+	- Memastikan data toolbar sesuai dengan yang diharapkan
+   -) Menampilkan data tvshow
+	- Memastikan rv_tvshow dalam keadaan tampil
+   -) Menampilkan data detail movie
+	- Memberi tindakan klik pada data pertama di rv_tvshow
+	- Memastikan data toolbar sesuai dengan yang diharapkan

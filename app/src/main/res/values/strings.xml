@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Moca</string>
+    <string name="movie">Movie</string>
+    <string name="tvshow">Tv Show</string>
+    <string name="poster">Move/Tv Poster</string>
+    <string name="background">Trailer Background</string>
+    <string name="button">Showing Trailer</string>
+    <string name="splashscreen">Splashscreen Logo</string>
+    <string name="title">Movie/TvShow Title</string>
+</resources>
