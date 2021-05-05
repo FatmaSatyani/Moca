@@ -1,7 +1,7 @@
 package com.fatmasatyani.moca.data
 
 import android.os.Parcelable
-import androidx.room.Entity
+import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -11,28 +11,28 @@ import kotlinx.parcelize.Parcelize
 data class MovieDetailResponse (
     @PrimaryKey(autoGenerate = false)
 
-    @field:SerializedName("id")
+    @ColumnInfo(name = "id")
     val id: Int,
 
-    @field:SerializedName("backdrop_path")
+    @ColumnInfo(name = "backdrop_path")
     val backdropPath: String,
 
-    @field:SerializedName("overview")
+    @ColumnInfo(name = "overview")
     val overview: String,
 
-    @field:SerializedName("release_date")
+    @ColumnInfo(name = "release_date")
     val releaseDate: String,
 
-    @field:SerializedName("vote_average")
+    @ColumnInfo(name = "vote_average")
     val voteAverage: Float,
 
-    @field:SerializedName("runtime")
+    @ColumnInfo(name = "runtime")
     val runtime: Int,
 
-    @field:SerializedName("title")
+    @ColumnInfo(name = "title")
     val title: String,
 
-    @field:SerializedName("poster_path")
+    @ColumnInfo(name = "poster_path")
     val posterPath: String
         ):Parcelable
 

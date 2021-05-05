@@ -1,6 +1,7 @@
 package com.fatmasatyani.moca.source.remote
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.data.TvShow
@@ -17,7 +18,18 @@ class ListRepository (private val localRepository: LocalRepository, private val 
     }
 
     override fun getListMovies(page: Int): LiveData<List<Movie>> {
-        return remoteRepository.getMovie(page)
+        return remoteRepository.getMovie(page).map { it.map { movie->
+            Movie(
+                movie.id,
+                movie.backdropPath,
+                movie.overview,
+                movie.releaseDate,
+                movie.voteAverage,
+                movie.runtime,
+                movie.title,
+                movie.posterPath
+            )}
+        }
     }
 
     override fun getMovie(id: Int): LiveData<Movie> {
@@ -25,7 +37,17 @@ class ListRepository (private val localRepository: LocalRepository, private val 
     }
 
     override fun getListTvShows(page: Int): LiveData<List<TvShow>> {
-        return remoteRepository.getTvShow(page)
+        return remoteRepository.getTvShow(page).map { it.map { tvShow ->
+            TvShow(
+                tvShow.id,
+                tvShow.backdropPath,
+                tvShow.overview,
+                tvShow.firstAirDate,
+                tvShow.voteAverage,
+                tvShow.name,
+                tvShow.posterPath
+            )}
+        }
     }
 
     override fun getTvShow(id: Int): LiveData<TvShow> {

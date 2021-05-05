@@ -25,7 +25,7 @@ class RemoteRepository {
 //    private val api_key = BuildConfig.API_KEY
     private val apiConfig = ApiConfig.getApiService()
     private val TAG = RemoteRepository::class.java.toString()
-    private var handler = Handler(Looper.getMainLooper())
+//    private var handler = Handler(Looper.getMainLooper())
 
 
     companion object {
