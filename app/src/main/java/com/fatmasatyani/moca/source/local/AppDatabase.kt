@@ -6,14 +6,13 @@ import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 import com.fatmasatyani.moca.dao.MovieDao
 import com.fatmasatyani.moca.dao.TvShowDao
-import com.fatmasatyani.moca.utils.Converters
 
 @Database (
     entities = [MovieResponse::class, TvResponse::class],
     version = 2,
     exportSchema = false
         )
-@TypeConverters(Converters::class)
+//@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao() : MovieDao

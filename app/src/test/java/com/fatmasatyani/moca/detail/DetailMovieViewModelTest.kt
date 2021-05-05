@@ -1,4 +1,4 @@
-package com.fatmasatyani.moca.movie
+package com.fatmasatyani.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -11,28 +11,29 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.*
 
-class MovieViewModelTest {
+class DetailMovieViewModelTest {
 
     @Rule
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
-    private lateinit var viewModel: MovieViewModel
+    private lateinit var viewModel: DetailMovieViewModel
     private var repository = mock(ListRepository::class.java)
+    private var dummyMovie = DataDummy.generateDummyMovie()[0]
+    private var movieId = dummyMovie.id
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(repository)
+        viewModel = DetailMovieViewModel(repository)
+        viewModel.movieId = movieId
     }
 
     @Test
     fun getMovie() {
-        val page = 1
-        val movie: MutableLiveData<List<Movie>> = MutableLiveData()
-        val observer = mock(Observer::class.java) as Observer<List<Movie>>
-        val dummyMovie = DataDummy.generateDummyMovie()
+        val movie: MutableLiveData<Movie> = MutableLiveData()
         movie.postValue(dummyMovie)
-        `when`(repository.getListMovies(1)).thenReturn(movie)
-        viewModel.getMovie().observeForever(observer)
+        `when`(repository.getMovie(movieId)).thenReturn(movie)
+        val observer = mock (Observer::class.java) as Observer<Movie>
+        viewModel.setSelectedMovie().observeForever(observer)
         verify(observer).onChanged(dummyMovie)
     }
 }
