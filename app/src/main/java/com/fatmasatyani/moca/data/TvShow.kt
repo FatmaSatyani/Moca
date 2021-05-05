@@ -2,14 +2,14 @@ package com.fatmasatyani.moca.data
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
-
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "TvShow")
 data class TvShow(
-
+        @PrimaryKey(autoGenerate = false)
         @field:SerializedName("id")
         val id: Int,
 
@@ -25,8 +25,8 @@ data class TvShow(
         @field:SerializedName("vote_average")
         val voteAverage: Float,
 
-        @field:SerializedName("episode_run_time")
-        val episodeRunTime: List<Int?>,
+//        @field:SerializedName("episode_run_time")
+//        val episodeRunTime: List<Int?>,
 
         @field:SerializedName("name")
         val name: String,

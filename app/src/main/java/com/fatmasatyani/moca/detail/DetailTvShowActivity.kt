@@ -50,7 +50,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
             detailBinding.tvTitle.text = tvShow.name
             detailBinding.tvRelease.text = tvShow.firstAirDate
-            detailBinding.tvRuntime.text = tvShow.episodeRunTime.toString()
+//            detailBinding.tvRuntime.text = tvShow.episodeRunTime.toString()
             detailBinding.tvTextOverview.text = tvShow.overview
             detailBinding.ratingBar.rating = (tvShow.voteAverage/2)
             Glide.with(this)

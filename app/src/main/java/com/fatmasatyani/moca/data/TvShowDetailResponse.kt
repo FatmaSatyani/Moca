@@ -1,16 +1,13 @@
 package com.fatmasatyani.moca.data
 
 import android.os.Parcelable
-import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "Movie")
-data class Movie (
+data class TvShowDetailResponse (
     @PrimaryKey(autoGenerate = false)
-
     @field:SerializedName("id")
     val id: Int,
 
@@ -20,18 +17,18 @@ data class Movie (
     @field:SerializedName("overview")
     val overview: String,
 
-    @field:SerializedName("release_date")
-    val releaseDate: String,
+    @field:SerializedName("first_air_date")
+    val firstAirDate: String,
 
     @field:SerializedName("vote_average")
     val voteAverage: Float,
 
-    @field:SerializedName("runtime")
-    val runtime: Int,
+//        @field:SerializedName("episode_run_time")
+//        val episodeRunTime: List<Int?>,
 
-    @field:SerializedName("title")
-    val title: String,
+    @field:SerializedName("name")
+    val name: String,
 
     @field:SerializedName("poster_path")
     val posterPath: String
-) : Parcelable
+        ): Parcelable

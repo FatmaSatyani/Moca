@@ -6,9 +6,11 @@ import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 import com.fatmasatyani.moca.dao.MovieDao
 import com.fatmasatyani.moca.dao.TvShowDao
+import com.fatmasatyani.moca.data.Movie
+import com.fatmasatyani.moca.data.TvShow
 
 @Database (
-    entities = [MovieResponse::class, TvResponse::class],
+    entities = [Movie::class, TvShow::class],
     version = 2,
     exportSchema = false
         )

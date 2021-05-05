@@ -1,13 +1,19 @@
 package com.fatmasatyani.moca.source.remote
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.fatmasatyani.moca.BuildConfig
 import com.fatmasatyani.moca.data.Movie
+import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.data.TvShow
+import com.fatmasatyani.moca.data.TvShowDetailResponse
 import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 import com.fatmasatyani.moca.utils.EspressoIdlingResouce
+import kotlinx.coroutines.handleCoroutineException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,17 +21,32 @@ import retrofit2.Response
 class RemoteRepository {
 
 //    private val apiConfig = ApiConfig.getApiService().create(ApiService::class.java)
+//    private val apiConfig = ApiConfig
+//    private val api_key = BuildConfig.API_KEY
     private val apiConfig = ApiConfig.getApiService()
     private val TAG = RemoteRepository::class.java.toString()
+    private var handler = Handler(Looper.getMainLooper())
+
 
     companion object {
         fun getInstance(): RemoteRepository {
             return RemoteRepository()
         }
     }
+//
+//    interface getMovieCallback {
+//        fun onResponse (movieResponse: List <Movie>)
+//    }
+//
+//    fun getMovie (getMovieCallback: getMovieCallback) {
+//        EspressoIdlingResouce.increment()
+//        handler.postDelayed({
+//            apiConfig.create().getMovie(apiConfig).enqueue(object : Callback<MovieResponse>)
+//        })
+//    }
 
-    fun getMovie (page:Int): LiveData<List<Movie>> {
-        val movie: MutableLiveData<List<Movie>> = MutableLiveData()
+    fun getMovie (page:Int): LiveData<List<MovieDetailResponse>> {
+        val movie: MutableLiveData<List<MovieDetailResponse>> = MutableLiveData()
         EspressoIdlingResouce.increment()
 
         apiConfig.popularMovie(page).enqueue(
@@ -64,8 +85,8 @@ class RemoteRepository {
         return movieById
     }
 
-    fun getTvShow (page:Int): LiveData<List<TvShow>> {
-        val tvShow: MutableLiveData<List<TvShow>> = MutableLiveData()
+    fun getTvShow (page:Int): LiveData<List<TvShowDetailResponse>> {
+        val tvShow: MutableLiveData<List<TvShowDetailResponse>> = MutableLiveData()
         EspressoIdlingResouce.increment()
 
         apiConfig.popularTvShow(page).enqueue(
@@ -104,6 +125,7 @@ class RemoteRepository {
         return tvShowById
     }
 }
+
 
 
 

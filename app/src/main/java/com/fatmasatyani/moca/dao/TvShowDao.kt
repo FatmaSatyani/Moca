@@ -2,28 +2,29 @@ package com.fatmasatyani.moca.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 
 @Dao
 interface TvShowDao {
 
     @Query("SELECT * FROM TvShow")
-    fun getList(): LiveData<List<TvResponse>>
+    fun getList(): LiveData<List<TvShow>>
 
 //    @Query ( "SELECT * FROM TvShow")
 //    fun getPopularPaged(): DataSource.Factory<Int, TvResponse>
 
     @Query("SELECT * FROM TvShow WHERE id = :id")
-    fun getTvShowById(id: Int) : TvResponse
+    fun getTvShowById(id: Int) : TvShow
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert (tvShow: TvResponse): Long
+    fun insert (tvShow: TvShow): Long
 
     @Update
-    fun update (tvShow: TvResponse): Int
+    fun update (tvShow: TvShow): Int
 
     @Delete
-    fun delete (tvShow: TvResponse)
+    fun delete (tvShow: TvShow)
 
     @Query("DELETE FROM TvShow WHERE id =:id")
     fun deleteTvShowById (id:Long) : Int
