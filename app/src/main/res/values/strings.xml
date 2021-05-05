@@ -2,9 +2,14 @@
     <string name="app_name">Moca</string>
     <string name="movie">Movie</string>
     <string name="tvshow">Tv Show</string>
-    <string name="poster">Move/Tv Poster</string>
-    <string name="background">Trailer Background</string>
+    <string name="poster">Poster</string>
+    <string name="background">Background</string>
+    <string name="backdrop">Backdrop</string>
     <string name="button">Showing Trailer</string>
     <string name="splashscreen">Splashscreen Logo</string>
-    <string name="title">Movie/TvShow Title</string>
+    <string name="title">Title</string>
+    <string name="release_date">Release Date: </string>
+    <string name="run_time">Run Time</string>
+    <string name="overview">Overview</string>
+    <string name="text_for_overview">Text for Overview</string>
 </resources>
