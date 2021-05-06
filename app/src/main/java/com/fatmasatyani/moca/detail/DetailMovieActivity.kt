@@ -1,6 +1,7 @@
 package com.fatmasatyani.moca.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,6 +29,7 @@ class DetailMovieActivity : AppCompatActivity() {
         detailBinding.progressBar.show()
 
         movieId = intent.getIntExtra("movieId", 0)
+        Log.d("TEST","${movieId}")
 
         detailViewModel = obtainViewModel(this)
         detailViewModel.movieId = movieId

@@ -94,25 +94,6 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/run_time_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/run_time_label"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/release_date_label" />
-
-            <TextView
-                android:id="@+id/tv_runtime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/run_time"
-                app:layout_constraintBottom_toBottomOf="@+id/run_time_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_release"
-                app:layout_constraintTop_toTopOf="@+id/run_time_label" />
-
-            <TextView
                 android:id="@+id/overview_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -120,7 +101,7 @@
                 android:text="@string/overview"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_runtime" />
+                app:layout_constraintTop_toBottomOf="@+id/release_date_label" />
 
             <TextView
                 android:id="@+id/tv_textOverview"
@@ -129,7 +110,7 @@
                 android:text="@string/text_for_overview"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/overview_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_runtime"
+                app:layout_constraintStart_toStartOf="@+id/tv_release"
                 app:layout_constraintTop_toTopOf="@+id/overview_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias="0.0" />

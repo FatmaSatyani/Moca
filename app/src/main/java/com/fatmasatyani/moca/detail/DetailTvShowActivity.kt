@@ -1,6 +1,7 @@
 package com.fatmasatyani.moca.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -32,6 +33,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         detailBinding.progressBar.show()
 
         tvShowId = intent.getIntExtra("tvShowId", 0)
+        Log.d("TESTING","$tvShowId")
 
         detailViewModel = obtainViewModel(this)
         detailViewModel.tvShowId = tvShowId
@@ -41,7 +43,6 @@ class DetailTvShowActivity : AppCompatActivity() {
 
             detailBinding.tvTitle.text = tvShow.name
             detailBinding.tvRelease.text = tvShow.firstAirDate
-            detailBinding.tvRuntime.text = tvShow.episodeRunTime.toString()
             detailBinding.tvTextOverview.text = tvShow.overview
             detailBinding.ratingBar.rating = (tvShow.voteAverage / 2)
             Glide.with(this)
