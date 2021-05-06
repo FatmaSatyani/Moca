@@ -14,7 +14,6 @@ import com.fatmasatyani.moca.data.TvShow
     version = 2,
     exportSchema = false
         )
-//@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao() : MovieDao

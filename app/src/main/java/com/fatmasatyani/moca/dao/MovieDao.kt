@@ -12,9 +12,6 @@ interface MovieDao {
     @Query("SELECT * FROM Movie")
     fun getList(): LiveData<List<Movie>>
 
-//    @Query ( "SELECT * FROM Movie")
-//    fun getPopularPaged(): DataSource.Factory<Int, MovieResponse>
-
     @Query ("SELECT * FROM Movie WHERE id = :id")
     fun getMovieById(id: Int) : Movie
 

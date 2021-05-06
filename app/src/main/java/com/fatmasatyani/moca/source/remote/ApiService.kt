@@ -11,20 +11,16 @@ import retrofit2.http.*
 interface ApiService {
 
 
-    @GET("movie/{id}?Authorization = $API_KEY")
-//    @Headers("Authorization: ${API_KEY}")
-    fun movie(@Path("id") id: Int) : Call<Movie>
+    @GET("movie/{id}")
+    fun movie(@Path("id") id: Int, @Query("api_key") apiKey: String) : Call<Movie>
 
-    @GET("movie/popular?Authorization = $API_KEY")
-//    @Headers("Authorization: ${API_KEY}")
-    fun popularMovie (@Query("page") page: Int) : Call <MovieResponse>
+    @GET("movie/popular")
+    fun popularMovie (@Query("api_key") apiKey: String) : Call <MovieResponse>
 
-    @GET("tv/{id}?Authorization = $API_KEY")
-//    @Headers("Authorization: ${API_KEY}")
-    fun tvShow(@Path("id") id: Int) : Call<TvShow>
+    @GET("tv/{id}")
+    fun tvShow(@Path("id") id: Int, @Query("api_key") apiKey: String) : Call<TvShow>
 
-    @GET("tv/popular?Authorization = $API_KEY")
-//    @Headers("Authorization: ${API_KEY}")
-    fun popularTvShow (@Query("page") page: Int) : Call <TvResponse>
+    @GET("tv/popular")
+    fun popularTvShow (@Query("api_key") apiKey: String) : Call <TvResponse>
 
 }

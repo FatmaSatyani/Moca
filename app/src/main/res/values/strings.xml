@@ -8,8 +8,10 @@
     <string name="button">Showing Trailer</string>
     <string name="splashscreen">Splashscreen Logo</string>
     <string name="title">Title</string>
-    <string name="release_date">Release Date: </string>
+    <string name="release_date">Release Date</string>
+    <string name="release_data_label">Release Date</string>
     <string name="run_time">Run Time</string>
+    <string name="run_time_label">Run Time</string>
     <string name="overview">Overview</string>
-    <string name="text_for_overview">Text for Overview</string>
+    <string name="text_for_overview">Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsungs best warrior, Sub-Zero, seeks out and trains with Earths greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.</string>
 </resources>

@@ -4,8 +4,7 @@ import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-
 data class MovieResponse(
-	@SerializedName("result")
+	@SerializedName("results")
 	val result: MutableList<MovieDetailResponse>)
 

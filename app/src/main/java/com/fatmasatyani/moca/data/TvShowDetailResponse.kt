@@ -1,7 +1,6 @@
 package com.fatmasatyani.moca.data
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -9,27 +8,27 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TvShowDetailResponse (
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "id")
+    @field:SerializedName("id")
     val id: Int,
 
-    @ColumnInfo(name = "backdrop_path")
+    @field:SerializedName("backdrop_path")
     val backdropPath: String,
 
-    @ColumnInfo(name = "overview")
+    @field:SerializedName("overview")
     val overview: String,
 
-    @ColumnInfo(name = "first_air_date")
+    @field:SerializedName("first_air_date")
     val firstAirDate: String,
 
-    @ColumnInfo(name = "vote_average")
+    @field:SerializedName("vote_average")
     val voteAverage: Float,
 
-//        @field:SerializedName("episode_run_time")
-//        val episodeRunTime: List<Int?>,
+    @field:SerializedName("episode_run_time")
+    val episodeRunTime: Int,
 
-    @ColumnInfo(name = "name")
+    @field:SerializedName("name")
     val name: String,
 
-    @ColumnInfo(name = "poster_path")
+    @field:SerializedName("poster_path")
     val posterPath: String
         ): Parcelable

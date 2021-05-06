@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fatmasatyani.moca.detail.DetailMovieViewModel
+import com.fatmasatyani.moca.detail.DetailTvShowViewModel
 import com.fatmasatyani.moca.di.Injection
 import com.fatmasatyani.moca.movie.MovieViewModel
 import com.fatmasatyani.moca.source.remote.ListRepository
@@ -28,6 +29,7 @@ class ViewModelFactory private constructor(private val listRepository: ListRepos
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> DetailMovieViewModel(listRepository) as (T)
+            modelClass.isAssignableFrom(DetailTvShowViewModel::class.java) -> DetailTvShowViewModel(listRepository) as (T)
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> MovieViewModel(listRepository) as (T)
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> TvShowViewModel(listRepository) as (T)
 

@@ -2,6 +2,7 @@ package com.fatmasatyani.moca.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 
@@ -11,13 +12,10 @@ interface TvShowDao {
     @Query("SELECT * FROM TvShow")
     fun getList(): LiveData<List<TvShow>>
 
-//    @Query ( "SELECT * FROM TvShow")
-//    fun getPopularPaged(): DataSource.Factory<Int, TvResponse>
-
     @Query("SELECT * FROM TvShow WHERE id = :id")
     fun getTvShowById(id: Int) : TvShow
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = REPLACE)
     fun insert (tvShow: TvShow): Long
 
     @Update

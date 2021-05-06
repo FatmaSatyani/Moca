@@ -25,13 +25,13 @@ import com.fatmasatyani.moca.movie.MovieViewModel
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 import com.fatmasatyani.moca.tvshow.TvShowViewModel as TvShowViewModel
 
-
 class TvShowFragment : Fragment() {
 
     private var tvShowList: MutableList<TvShow> = mutableListOf()
     private lateinit var binding: FragmentTvShowBinding
     private lateinit var viewModel: TvShowViewModel
     private lateinit var adapter: TvShowAdapter
+    private var page = 1
 
 //    companion object {
 //        @JvmStatic
@@ -52,20 +52,21 @@ class TvShowFragment : Fragment() {
 
         if (activity != null) {
             viewModel = obtainViewModel(requireActivity())
-            adapter = TvShowAdapter(requireContext()) {
+            adapter = TvShowAdapter(requireContext()) { tvShow ->
                 val intent = Intent (requireContext(), DetailTvShowActivity::class.java)
-                intent.putExtra("tvShowId", id)
+                intent.putExtra("tvShowId", tvShow.id)
                 startActivity(intent)
             }
 
             loadTvShow()
             binding.rvTvShows.adapter = adapter
-            binding.rvTvShows.layoutManager = LinearLayoutManager(context)
+            binding.rvTvShows.layoutManager = GridLayoutManager(context,2)
             binding.rvTvShows.setHasFixedSize(true)
         }
     }
 
     private fun loadTvShow() {
+        viewModel.page = page
         viewModel.getTvShow().observe(viewLifecycleOwner, Observer { tvShow ->
             tvShowList.addAll(tvShow)
             adapter.setTvShows(tvShowList)
@@ -74,7 +75,6 @@ class TvShowFragment : Fragment() {
 
     private fun obtainViewModel(requireActivity: FragmentActivity): TvShowViewModel {
         val factory = ViewModelFactory.getInstance(requireActivity.application)
-        return ViewModelProviders.of(this,factory)[TvShowViewModel::class.java]
-//        return viewModel
+        return ViewModelProviders.of(requireActivity,factory)[TvShowViewModel::class.java]
     }
 }

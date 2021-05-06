@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.fatmasatyani.moca.data.Movie
+import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.source.remote.ListRepository
 import com.fatmasatyani.moca.utils.DataDummy
 import org.junit.Before
@@ -29,7 +30,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun getMovie() {
-        val movie: MutableLiveData<Movie> = MutableLiveData()
+        val movie: MutableLiveData<MovieDetailResponse> = MutableLiveData()
         movie.postValue(dummyMovie)
         `when`(repository.getMovie(movieId)).thenReturn(movie)
         val observer = mock (Observer::class.java) as Observer<Movie>

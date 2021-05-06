@@ -12,6 +12,7 @@ import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.RowItemsBinding
 import com.fatmasatyani.moca.detail.DetailMovieActivity
+import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
 class TvShowAdapter(private val context: Context, private val listener: (TvShow) -> Unit) :RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
@@ -41,14 +42,9 @@ class TvShowAdapter(private val context: Context, private val listener: (TvShow)
             with(binding) {
                 itemTitle.text = tvShow.name
                 itemView.setOnClickListener{listener(tvShow)}
-//                itemView.setOnClickListener{
-//                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.movieId)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_TYPE, "movie")
-//                    itemView.context.startActivity(intent)
-//                }
+
                 Glide.with(itemView.context)
-                    .load(tvShow.posterPath)
+                    .load("$IMG_URL${tvShow.posterPath}")
                     .into(itemPoster)
             }
         }

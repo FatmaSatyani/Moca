@@ -1,5 +1,6 @@
 package com.fatmasatyani.moca.data
 
+import android.content.Context
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "Movie")
-data class Movie (
+data class Movie(
     @PrimaryKey(autoGenerate = false)
 
     @field:SerializedName("id")

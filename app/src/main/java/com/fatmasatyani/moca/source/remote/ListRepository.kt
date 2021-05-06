@@ -3,11 +3,8 @@ package com.fatmasatyani.moca.source.remote
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.source.local.LocalRepository
-import com.fatmasatyani.moca.source.remote.response.MovieResponse
-import com.fatmasatyani.moca.source.remote.response.TvResponse
 
 class ListRepository (private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository): ListDataSource {
 
@@ -18,7 +15,7 @@ class ListRepository (private val localRepository: LocalRepository, private val 
     }
 
     override fun getListMovies(page: Int): LiveData<List<Movie>> {
-        return remoteRepository.getMovie(page).map { it.map { movie->
+        return remoteRepository.getMovie().map { it.map { movie->
             Movie(
                 movie.id,
                 movie.backdropPath,
@@ -37,13 +34,14 @@ class ListRepository (private val localRepository: LocalRepository, private val 
     }
 
     override fun getListTvShows(page: Int): LiveData<List<TvShow>> {
-        return remoteRepository.getTvShow(page).map { it.map { tvShow ->
+        return remoteRepository.getTvShow().map { it.map { tvShow ->
             TvShow(
                 tvShow.id,
                 tvShow.backdropPath,
                 tvShow.overview,
                 tvShow.firstAirDate,
                 tvShow.voteAverage,
+                tvShow.episodeRunTime,
                 tvShow.name,
                 tvShow.posterPath
             )}

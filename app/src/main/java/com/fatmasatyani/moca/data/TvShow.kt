@@ -25,8 +25,8 @@ data class TvShow(
         @field:SerializedName("vote_average")
         val voteAverage: Float,
 
-//        @field:SerializedName("episode_run_time")
-//        val episodeRunTime: List<Int?>,
+        @field:SerializedName("episode_run_time")
+        val episodeRunTime: Int?,
 
         @field:SerializedName("name")
         val name: String,

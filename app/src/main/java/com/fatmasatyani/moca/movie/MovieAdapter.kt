@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fatmasatyani.moca.data.Movie
+import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.RowItemsBinding
+import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
 class MovieAdapter(private val context: Context, private val listener: (Movie) -> Unit) :RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -36,14 +38,9 @@ class MovieAdapter(private val context: Context, private val listener: (Movie) -
             with(binding) {
                 itemTitle.text = movie.title
                 itemView.setOnClickListener{listener(movie)}
-//                itemView.setOnClickListener{
-//                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.movieId)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_TYPE, "movie")
-//                    itemView.context.startActivity(intent)
-//                }
+
                 Glide.with(itemView.context)
-                        .load(movie.posterPath)
+                        .load("$IMG_URL${movie.posterPath}")
                         .into(itemPoster)
             }
         }
