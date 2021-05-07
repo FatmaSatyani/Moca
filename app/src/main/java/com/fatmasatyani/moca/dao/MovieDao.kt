@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.response.MovieResponse
 
 @Dao
 interface MovieDao {

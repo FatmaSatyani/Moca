@@ -1,20 +1,14 @@
 package com.fatmasatyani.moca.tvshow
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.fatmasatyani.moca.R
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.RowItemsBinding
-import com.fatmasatyani.moca.detail.DetailMovieActivity
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
-class TvShowAdapter(private val context: Context, private val listener: (TvShow) -> Unit) :RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+class TvShowAdapter(private val listener: (TvShow) -> Unit) :RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     private var listTvShows : MutableList<TvShow> = mutableListOf()
 

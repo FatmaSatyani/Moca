@@ -3,9 +3,7 @@
     <string name="movie">Movie</string>
     <string name="tvshow">Tv Show</string>
     <string name="poster">Poster</string>
-    <string name="background">Background</string>
     <string name="backdrop">Backdrop</string>
-    <string name="button">Showing Trailer</string>
     <string name="splashscreen">Splashscreen Logo</string>
     <string name="title">Title</string>
     <string name="release_date">Release Date</string>

@@ -3,17 +3,14 @@ package com.fatmasatyani.moca.tvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.fatmasatyani.moca.R
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.movie.MovieViewModel
 import com.fatmasatyani.moca.source.remote.ListRepository
-import com.fatmasatyani.moca.utils.DataDummy
-import junit.framework.TestCase.assertEquals
+import com.fatmasatyani.moca.utils.FakeData
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 
 class TvShowViewModelTest {
 
@@ -21,7 +18,7 @@ class TvShowViewModelTest {
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var viewModel: TvShowViewModel
-    private var repository = Mockito.mock(ListRepository::class.java)
+    private var repository = mock(ListRepository::class.java)
 
     @Before
     fun setUp() {
@@ -32,11 +29,12 @@ class TvShowViewModelTest {
     fun getTvShow() {
         val page = 1
         val tvShow: MutableLiveData<List<TvShow>> = MutableLiveData()
-        val observer = Mockito.mock(Observer::class.java) as Observer<List<TvShow>>
-        val dummyTvShow = DataDummy.generateDummyTvShow()
+        val observer = mock(Observer::class.java) as Observer<List<TvShow>>
+        val dummyTvShow = FakeData.generateDummyTvShow()
         tvShow.postValue(dummyTvShow)
-        Mockito.`when`(repository.getListTvShows(1)).thenReturn(tvShow)
+        Mockito.`when`(repository.getListTvShows(page)).thenReturn(tvShow)
         viewModel.getTvShow().observeForever(observer)
         Mockito.verify(observer).onChanged(dummyTvShow)
     }
+
 }

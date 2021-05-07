@@ -3,16 +3,14 @@ package com.fatmasatyani.moca.source.remote
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.data.TvShowDetailResponse
 import com.fatmasatyani.moca.source.local.LocalRepository
 
-class ListRepository (private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository): ListDataSource {
+class ListRepository(private val remoteRepository: RemoteRepository, private val localRepository: LocalRepository): ListDataSource {
 
     companion object {
         fun getInstance(remoteRepository: RemoteRepository, localRepository: LocalRepository): ListRepository {
-            return ListRepository(localRepository, remoteRepository)
+            return ListRepository(remoteRepository, localRepository)
         }
     }
 

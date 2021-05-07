@@ -1,20 +1,13 @@
 package com.fatmasatyani.moca.source.remote
 
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.fatmasatyani.moca.BuildConfig
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.MovieDetailResponse
-import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.data.TvShowDetailResponse
 import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 import com.fatmasatyani.moca.utils.Constant.Companion.API_KEY
-import com.fatmasatyani.moca.utils.EspressoIdlingResouce
-import kotlinx.coroutines.handleCoroutineException
+import com.fatmasatyani.moca.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +15,6 @@ import retrofit2.Response
 class RemoteRepository {
 
     private val apiConfig = ApiConfig.getApiService()
-    private val TAG = RemoteRepository::class.java.toString()
 
     companion object {
         fun getInstance(): RemoteRepository {
@@ -32,38 +24,35 @@ class RemoteRepository {
 
     fun getMovie (): LiveData<List<MovieDetailResponse>> {
         val movie: MutableLiveData<List<MovieDetailResponse>> = MutableLiveData()
-        EspressoIdlingResouce.increment()
+        EspressoIdlingResource.increment()
 
-        apiConfig.popularMovie("$API_KEY").enqueue(
+        apiConfig.popularMovie(API_KEY).enqueue(
             object : Callback<MovieResponse>{
                 override fun onResponse(
                     call: Call<MovieResponse>,
                     response: Response<MovieResponse>
                 ) {
-                    Log.d("RepositoryCheck",response.body()?.result.toString())
                     response.body()?.let { movie.postValue(it.result) }
-                    EspressoIdlingResouce.decrement()
+                    EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                    Log.d(TAG, t.printStackTrace().toString())
                 }
             }
         )
         return movie
     }
 
-    fun getMovieById(id: Int): LiveData<Movie> {
-        val movieById: MutableLiveData<Movie> = MutableLiveData()
-        EspressoIdlingResouce.increment()
+    fun getMovieById(id: Int): LiveData<MovieDetailResponse> {
+        val movieById: MutableLiveData<MovieDetailResponse> = MutableLiveData()
+        EspressoIdlingResource.increment()
 
-        apiConfig.movie(id,"$API_KEY").enqueue(
-            object : Callback<Movie> {
-                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+        apiConfig.movie(id, API_KEY).enqueue(
+            object : Callback<MovieDetailResponse> {
+                override fun onResponse(call: Call<MovieDetailResponse>, response: Response<MovieDetailResponse>) {
                     movieById.postValue(response.body())
-                    EspressoIdlingResouce.decrement()
+                    EspressoIdlingResource.decrement()
                 }
-                override fun onFailure(call: Call<Movie>, t: Throwable) {
-                    Log.d(TAG, t.printStackTrace().toString())
+                override fun onFailure(call: Call<MovieDetailResponse>, t: Throwable) {
                 }
             }
         )
@@ -72,37 +61,35 @@ class RemoteRepository {
 
     fun getTvShow (): LiveData<List<TvShowDetailResponse>> {
         val tvShow: MutableLiveData<List<TvShowDetailResponse>> = MutableLiveData()
-        EspressoIdlingResouce.increment()
+        EspressoIdlingResource.increment()
 
-        apiConfig.popularTvShow("$API_KEY").enqueue(
+        apiConfig.popularTvShow(API_KEY).enqueue(
             object : Callback<TvResponse>{
                 override fun onResponse(
                     call: Call<TvResponse>,
                     response: Response<TvResponse>
                 ) {
                     response.body()?.let { tvShow.postValue(it.result) }
-                    EspressoIdlingResouce.decrement()
+                    EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<TvResponse>, t: Throwable) {
-                    Log.d(TAG, t.printStackTrace().toString())
                 }
             }
         )
         return tvShow
     }
 
-    fun getTvShowById(id:Int) : LiveData<TvShow> {
-        val tvShowById: MutableLiveData<TvShow> = MutableLiveData()
-        EspressoIdlingResouce.increment()
+    fun getTvShowById(id:Int) : LiveData<TvShowDetailResponse> {
+        val tvShowById: MutableLiveData<TvShowDetailResponse> = MutableLiveData()
+        EspressoIdlingResource.increment()
 
-        apiConfig.tvShow(id,"$API_KEY").enqueue(
-            object : Callback<TvShow> {
-                override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
+        apiConfig.tvShow(id, API_KEY).enqueue(
+            object : Callback<TvShowDetailResponse> {
+                override fun onResponse(call: Call<TvShowDetailResponse>, response: Response<TvShowDetailResponse>) {
                     tvShowById.postValue(response.body())
-                    EspressoIdlingResouce.decrement()
+                    EspressoIdlingResource.decrement()
                 }
-                override fun onFailure(call: Call<TvShow>, t: Throwable) {
-                    Log.d(TAG, t.printStackTrace().toString())
+                override fun onFailure(call: Call<TvShowDetailResponse>, t: Throwable) {
                 }
             }
         )

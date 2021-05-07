@@ -2,13 +2,11 @@ package com.fatmasatyani.moca.movie
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.fatmasatyani.moca.data.Movie
@@ -24,16 +22,11 @@ class MovieFragment : Fragment() {
     private lateinit var adapter: MovieAdapter
     private var page = 1
 
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() = MovieFragment()
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +36,7 @@ class MovieFragment : Fragment() {
 
         if (activity != null) {
             viewModel = obtainViewModel(requireActivity())
-            adapter = MovieAdapter(requireContext()) { movie ->
+            adapter = MovieAdapter { movie ->
                 val intent = Intent(requireContext(), DetailMovieActivity::class.java)
                 intent.putExtra("movieId", movie.id)
                 startActivity(intent)
@@ -57,11 +50,9 @@ class MovieFragment : Fragment() {
     }
 
     private fun loadMovie() {
-        Log.d("HOMELOG",page.toString())
         viewModel.page = page
-        viewModel.getMovie().observe(viewLifecycleOwner, Observer { movie ->
+        viewModel.getMovie().observe(viewLifecycleOwner, { movie ->
             movieList.addAll(movie)
-            Log.d("HOMECHECK",movieList[0].posterPath)
             adapter.setMovies(movieList)
         })
     }

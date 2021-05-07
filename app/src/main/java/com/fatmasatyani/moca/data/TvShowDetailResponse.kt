@@ -8,24 +8,25 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TvShowDetailResponse (
     @PrimaryKey(autoGenerate = false)
+
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
 
     @field:SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String = "",
 
     @field:SerializedName("overview")
-    val overview: String,
+    val overview: String = "",
 
     @field:SerializedName("first_air_date")
-    val firstAirDate: String,
+    val firstAirDate: String = "",
 
     @field:SerializedName("vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0f,
 
     @field:SerializedName("name")
-    val name: String,
+    val name: String = "",
 
     @field:SerializedName("poster_path")
-    val posterPath: String
+    val posterPath: String =""
         ): Parcelable

@@ -1,7 +1,6 @@
 package com.fatmasatyani.moca.viewmodel
 
 import android.app.Application
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fatmasatyani.moca.detail.DetailMovieViewModel
@@ -17,7 +16,7 @@ class ViewModelFactory private constructor(private val listRepository: ListRepos
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance (application: Application): ViewModelFactory? =
+        fun getInstance (application: Application): ViewModelFactory =
             instance?: synchronized(this) {
                 instance?:ViewModelFactory(Injection.provideRepository(application)).apply {
                     instance = this

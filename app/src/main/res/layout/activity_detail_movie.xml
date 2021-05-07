@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/backdropMovie"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:contentDescription="@string/backdrop"
@@ -33,7 +33,7 @@
                 tools:background="@color/Primary_Dark"/>
 
             <ImageView
-                android:id="@+id/detail_poster"
+                android:id="@+id/detail_movie_poster"
                 android:layout_width="180dp"
                 android:layout_height="240dp"
                 android:layout_marginTop="180dp"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_movie_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -57,80 +57,80 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_movie_poster" />
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/movie_RatingBar"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title" />
 
             <TextView
-                android:id="@+id/release_date_label"
+                android:id="@+id/movie_release_date_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/release_data_label"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+                app:layout_constraintStart_toStartOf="@+id/movie_RatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/movie_RatingBar" />
 
             <TextView
-                android:id="@+id/tv_release"
+                android:id="@+id/tv_movie_release"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/release_date"
-                app:layout_constraintBottom_toBottomOf="@+id/release_date_label"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_release_date_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/release_date_label"
-                app:layout_constraintTop_toTopOf="@+id/release_date_label"
+                app:layout_constraintStart_toEndOf="@+id/movie_release_date_label"
+                app:layout_constraintTop_toTopOf="@+id/movie_release_date_label"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/run_time_label"
+                android:id="@+id/movie_run_time_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/run_time_label"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/release_date_label" />
+                app:layout_constraintStart_toStartOf="@+id/movie_RatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/movie_release_date_label" />
 
             <TextView
-                android:id="@+id/tv_runtime"
+                android:id="@+id/tv_movie_runtime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/run_time"
-                app:layout_constraintBottom_toBottomOf="@+id/run_time_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_release"
-                app:layout_constraintTop_toTopOf="@+id/run_time_label" />
+                app:layout_constraintBottom_toBottomOf="@+id/movie_run_time_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_release"
+                app:layout_constraintTop_toTopOf="@+id/movie_run_time_label" />
 
             <TextView
-                android:id="@+id/overview_label"
+                android:id="@+id/movie_overview_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/overview"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_runtime" />
+                app:layout_constraintStart_toStartOf="@+id/movie_RatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_runtime" />
 
             <TextView
-                android:id="@+id/tv_textOverview"
+                android:id="@+id/tv_movie_textOverview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_for_overview"
                 android:layout_marginEnd="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/overview_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_runtime"
-                app:layout_constraintTop_toTopOf="@+id/overview_label"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_overview_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_runtime"
+                app:layout_constraintTop_toTopOf="@+id/movie_overview_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 

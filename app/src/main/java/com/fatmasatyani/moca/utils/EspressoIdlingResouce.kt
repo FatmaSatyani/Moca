@@ -2,10 +2,10 @@ package com.fatmasatyani.moca.utils
 
 import androidx.test.espresso.idling.CountingIdlingResource
 
-object EspressoIdlingResouce {
+object EspressoIdlingResource {
 
     private const val RESOURCE = "GLOBAL"
-    private val idlingResource = CountingIdlingResource(RESOURCE)
+    val idlingResource = CountingIdlingResource(RESOURCE)
 
     fun increment() {
         idlingResource.increment()

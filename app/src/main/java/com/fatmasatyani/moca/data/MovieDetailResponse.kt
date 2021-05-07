@@ -11,56 +11,26 @@ data class MovieDetailResponse (
     @PrimaryKey(autoGenerate = false)
 
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
 
     @field:SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String = "",
 
     @field:SerializedName("overview")
-    val overview: String,
+    val overview: String = "",
 
     @field:SerializedName("release_date")
-    val releaseDate: String,
+    val releaseDate: String = "",
 
     @field:SerializedName("vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0f,
 
     @field:SerializedName("runtime")
-    val runtime: Int,
+    val runtime: Int = 0,
 
     @field:SerializedName("title")
-    val title: String,
+    val title: String = "",
 
     @field:SerializedName("poster_path")
-    val posterPath: String
+    val posterPath: String =""
         ):Parcelable
-
-//@Parcelize
-//@Entity(tableName = "Movie")
-//data class Movie (
-//    @PrimaryKey(autoGenerate = false)
-//
-//    @field:SerializedName("id")
-//    val id: Int,
-//
-//    @field:SerializedName("backdrop_path")
-//    val backdropPath: String,
-//
-//    @field:SerializedName("overview")
-//    val overview: String,
-//
-//    @field:SerializedName("release_date")
-//    val releaseDate: String,
-//
-//    @field:SerializedName("vote_average")
-//    val voteAverage: Float,
-//
-//    @field:SerializedName("runtime")
-//    val runtime: Int,
-//
-//    @field:SerializedName("title")
-//    val title: String,
-//
-//    @field:SerializedName("poster_path")
-//    val posterPath: String
-//) : Parcelable

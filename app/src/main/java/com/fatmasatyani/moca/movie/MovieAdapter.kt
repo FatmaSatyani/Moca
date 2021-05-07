@@ -1,16 +1,14 @@
 package com.fatmasatyani.moca.movie
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.RowItemsBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
-class MovieAdapter(private val context: Context, private val listener: (Movie) -> Unit) :RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val listener: (Movie) -> Unit) :RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var listMovies : MutableList<Movie> = mutableListOf()
 
