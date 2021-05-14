@@ -40,11 +40,11 @@ class TvShowAdapter(private val listener: (TvShow) -> Unit) : PagedListAdapter<T
     }
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val tvShow = listTvShows[position]
-        holder.bind(tvShow,listener)
+        val tvShow = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow, listener)
+        }
     }
-
-    override fun getItemCount(): Int = listTvShows.size
 
     class TvShowViewHolder(private val binding: RowItemsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShow, listener: (TvShow) -> Unit) {

@@ -30,6 +30,8 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         favoriteAdapter = FavoriteViewPagerAdapter(view.context, requireActivity().supportFragmentManager)
+        binding.favoriteViewpager.adapter = favoriteAdapter
+        binding.favoriteTab.setupWithViewPager(binding.favoriteViewpager)
     }
 
 }

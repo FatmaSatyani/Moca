@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.fatmasatyani.moca.R
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.ActivityDetailTvShowBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 import com.fatmasatyani.moca.utils.hide
 import com.fatmasatyani.moca.utils.show
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class DetailTvShowActivity : AppCompatActivity() {
 
@@ -21,7 +23,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     private var tvShowId: Int = 1
     private lateinit var detailViewModel: DetailTvShowViewModel
-    private lateinit var aTvShow: TvShow
+    private lateinit var mTvShow: TvShow
     private lateinit var detailBinding: ActivityDetailTvShowBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,9 @@ class DetailTvShowActivity : AppCompatActivity() {
         detailViewModel.tvShowId = tvShowId
 
         detailViewModel.setSelectedTvShow().observe(this, {
+
             val tvShow = it.data
+
 
             if (tvShow != null) {
                 detailBinding.tvTvShowTitle.text = tvShow.name
@@ -53,8 +57,31 @@ class DetailTvShowActivity : AppCompatActivity() {
                     .transform(RoundedCorners(20))
                     .into(detailBinding.detailTvShowPoster)
                 detailBinding.progressBar.hide()
+
+                favoriteState()
             }
         })
+        detailBinding.btnTvFavorite.setOnClickListener { fabOnClick()}
+    }
+
+    private fun favoriteState() {
+        if (detailViewModel.isFavorite(mTvShow)) {
+            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+        } else {
+            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        }
+    }
+
+    private fun fabOnClick() {
+        if (detailViewModel.isFavorite(mTvShow)) {
+            detailViewModel.removeFavorite(mTvShow)
+            Snackbar.make(detailBinding.scrollView,"{mTvShow.name} removed from Favorite", Snackbar.LENGTH_SHORT).show()
+            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        } else {
+            detailViewModel.addFavorite(mTvShow)
+            Snackbar.make(detailBinding.scrollView, "{mTvShow.name} added to Favorite", Snackbar.LENGTH_SHORT).show()
+            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+        }
     }
 
     private fun obtainViewModel(detailActivity: DetailTvShowActivity): DetailTvShowViewModel {

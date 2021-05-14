@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fatmasatyani.moca.databinding.FragmentMovieBinding
@@ -36,9 +37,14 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
             viewModel = obtainViewModel(requireActivity())
             adapter = FavoriteMovieAdapter { movie ->
                 val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-                intent.putExtra("movieId", movie.id)
+                intent.putExtra("movieId", movie.movieId)
                 startActivity(intent)
             }
+
+            viewModel.getFavMovie().observe(viewLifecycleOwner, {
+                if (it != null) {
+                adapter.submitList(it)}
+            })
 
             binding?.rvMovies?.adapter = adapter
             binding?.rvMovies?.layoutManager = LinearLayoutManager(requireContext())

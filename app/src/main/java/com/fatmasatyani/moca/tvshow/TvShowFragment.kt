@@ -16,7 +16,6 @@ import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
-    private var tvShowList: MutableList<TvShow> = mutableListOf()
     private lateinit var binding: FragmentTvShowBinding
     private lateinit var viewModel: TvShowViewModel
     private lateinit var adapter: TvShowAdapter

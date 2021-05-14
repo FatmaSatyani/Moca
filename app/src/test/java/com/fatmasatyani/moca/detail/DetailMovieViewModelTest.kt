@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.utils.FakeData
+import com.fatmasatyani.moca.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -38,7 +39,7 @@ class DetailMovieViewModelTest {
         movie.postValue (movieId)
         `when`(repository.getMovie(1)).thenReturn(movie)
 
-        val observer = mock (Observer::class.java) as Observer<Movie>
+        val observer = mock (Observer::class.java) as Observer<Resource<Movie>>
         viewModel.setSelectedMovie().observeForever(observer)
         verify(observer).onChanged(movieId)
 

@@ -39,11 +39,11 @@ class MovieAdapter(private val listener: (Movie) -> Unit) : PagedListAdapter<Mov
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = listMovies[position]
-        holder.bind(movie,listener)
+        val movie = getItem(position)
+        if (movie != null) {
+            holder.bind(movie, listener)
+        }
     }
-
-    override fun getItemCount(): Int = listMovies.size
 
     class MovieViewHolder(private val binding: RowItemsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie, listener: (Movie) -> Unit) {

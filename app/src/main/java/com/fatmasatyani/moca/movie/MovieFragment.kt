@@ -51,7 +51,6 @@ class MovieFragment : Fragment() {
 
     private fun loadMovie() {
         viewModel.page = page
-        Log.d("TAG","Masuk")
         viewModel.getMovie().observe(viewLifecycleOwner, { movie ->
             adapter.submitList(movie.data)
         })

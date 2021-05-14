@@ -1,15 +1,20 @@
 package com.fatmasatyani.moca.detail
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.fatmasatyani.moca.R
+import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.databinding.ActivityDetailMovieBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 import com.fatmasatyani.moca.utils.hide
 import com.fatmasatyani.moca.utils.show
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -20,6 +25,7 @@ class DetailMovieActivity : AppCompatActivity() {
     private var movieId: Int = 1
     private lateinit var detailViewModel: DetailMovieViewModel
     private lateinit var detailBinding: ActivityDetailMovieBinding
+    private lateinit var mMovie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +57,33 @@ class DetailMovieActivity : AppCompatActivity() {
                     .transform(RoundedCorners(20))
                     .into(detailBinding.detailMoviePoster)
                 detailBinding.progressBar.hide()
+
+                favoriteState()
             }
         })
+        detailBinding.btnMvFavorite.setOnClickListener { fabOnClick()}
     }
+
+    private fun favoriteState() {
+        if (detailViewModel.isFavorite(mMovie)) {
+            detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+        } else {
+            detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        }
+    }
+
+    private fun fabOnClick() {
+        if (detailViewModel.isFavorite(mMovie)) {
+            detailViewModel.removeFavorite(mMovie)
+            Snackbar.make(detailBinding.scrollView,"{mMovie.title} removed from Favorite", Snackbar.LENGTH_SHORT).show()
+            detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        } else {
+            detailViewModel.addFavorite(mMovie)
+            Snackbar.make(detailBinding.scrollView, "{mMovie.title} added to Favorite", Snackbar.LENGTH_SHORT).show()
+            detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+        }
+    }
+
 
     private fun obtainViewModel(detailActivity: DetailMovieActivity): DetailMovieViewModel {
         val factory = ViewModelFactory.getInstance(detailActivity.application)

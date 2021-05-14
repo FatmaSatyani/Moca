@@ -7,20 +7,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.fatmasatyani.moca.data.FavoriteMovieData
+import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
-class FavoriteTvShowAdapter (private val listener: (TvShow) -> Unit) : PagedListAdapter<TvShow, FavoriteTvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK){
+class FavoriteTvShowAdapter (private val listener: (FavoriteTvShowData) -> Unit) : PagedListAdapter<FavoriteTvShowData, FavoriteTvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK){
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShow>() {
-            override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteTvShowData>() {
+            override fun areContentsTheSame(oldItem: FavoriteTvShowData, newItem: FavoriteTvShowData): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
-                return oldItem.id == newItem.id
+            override fun areItemsTheSame(oldItem: FavoriteTvShowData, newItem: FavoriteTvShowData): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
             }
         }
     }
@@ -44,7 +46,7 @@ class FavoriteTvShowAdapter (private val listener: (TvShow) -> Unit) : PagedList
     }
 
     inner class TvShowViewHolder(private val binding: FavoriteItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(tvShow: TvShow, listener: (TvShow) -> Unit) {
+        fun bind(tvShow: FavoriteTvShowData, listener: (FavoriteTvShowData) -> Unit) {
             with(binding) {
                 favTitle.text = tvShow.name
                 favRating.rating = tvShow.voteAverage

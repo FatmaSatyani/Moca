@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.fatmasatyani.moca.detail.DetailMovieViewModel
 import com.fatmasatyani.moca.detail.DetailTvShowViewModel
 import com.fatmasatyani.moca.di.Injection
+import com.fatmasatyani.moca.favorite.movie.FavoriteMovieViewModel
+import com.fatmasatyani.moca.favorite.tvshow.FavoriteTvShowViewModel
 import com.fatmasatyani.moca.movie.MovieViewModel
 import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.tvshow.TvShowViewModel
@@ -32,6 +34,8 @@ class ViewModelFactory private constructor(private val listRepository: MovieCata
             modelClass.isAssignableFrom(DetailTvShowViewModel::class.java) -> DetailTvShowViewModel(listRepository) as (T)
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> MovieViewModel(listRepository) as (T)
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> TvShowViewModel(listRepository) as (T)
+            modelClass.isAssignableFrom(FavoriteMovieViewModel::class.java) -> FavoriteMovieViewModel(listRepository) as (T)
+            modelClass.isAssignableFrom(FavoriteTvShowViewModel::class.java) -> FavoriteTvShowViewModel(listRepository) as (T)
 
             else ->  throw IllegalArgumentException("Unknown ViewModel class" + modelClass.name)
         }

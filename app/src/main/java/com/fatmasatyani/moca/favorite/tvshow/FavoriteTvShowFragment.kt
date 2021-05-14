@@ -38,9 +38,14 @@ class FavoriteTvShowFragment : Fragment() , FavoriteTvShowAdapter.OnItemClickCal
             viewModel = obtainViewModel(requireActivity())
             adapter = FavoriteTvShowAdapter { tvShow ->
                 val intent = Intent(requireContext(), DetailTvShowActivity::class.java)
-                intent.putExtra("tvShowId", tvShow.id)
+                intent.putExtra("tvShowId", tvShow.tvShowId)
                 startActivity(intent)
             }
+
+            viewModel.getFavTvShow().observe(viewLifecycleOwner, {
+                if (it != null) {
+                    adapter.submitList(it)}
+            })
 
             binding?.rvTvShows?.adapter = adapter
             binding?.rvTvShows?.layoutManager = LinearLayoutManager(requireContext())

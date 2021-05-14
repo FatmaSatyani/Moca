@@ -7,20 +7,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.fatmasatyani.moca.data.FavoriteMovieData
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant
 
-class FavoriteMovieAdapter (private val listener: (Movie) -> Unit) : PagedListAdapter<Movie, FavoriteMovieAdapter.MovieViewHolder> (DIFF_CALLBACK){
+class FavoriteMovieAdapter (private val listener: (FavoriteMovieData) -> Unit) : PagedListAdapter<FavoriteMovieData, FavoriteMovieAdapter.MovieViewHolder> (DIFF_CALLBACK){
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteMovieData>() {
+            override fun areContentsTheSame(oldItem: FavoriteMovieData, newItem: FavoriteMovieData): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return oldItem.id == newItem.id
+            override fun areItemsTheSame(oldItem: FavoriteMovieData, newItem: FavoriteMovieData): Boolean {
+                return oldItem.movieId == newItem.movieId
             }
         }
     }
@@ -44,7 +45,7 @@ class FavoriteMovieAdapter (private val listener: (Movie) -> Unit) : PagedListAd
     }
 
     inner class MovieViewHolder(private val binding: FavoriteItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(movie: Movie, listener: (Movie) -> Unit) {
+        fun bind(movie: FavoriteMovieData, listener: (FavoriteMovieData) -> Unit) {
             with(binding) {
                 favTitle.text = movie.title
                 favRating.rating = movie.voteAverage
