@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.databinding.ActivityDetailMovieBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 import com.fatmasatyani.moca.utils.hide
@@ -20,7 +19,6 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private var movieId: Int = 1
     private lateinit var detailViewModel: DetailMovieViewModel
-    private lateinit var aMovie: Movie
     private lateinit var detailBinding: ActivityDetailMovieBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,23 +33,25 @@ class DetailMovieActivity : AppCompatActivity() {
         detailViewModel = obtainViewModel(this)
         detailViewModel.movieId = movieId
 
-        detailViewModel.setSelectedMovie().observe(this, { movie ->
-            aMovie = movie
+        detailViewModel.setSelectedMovie().observe(this, {
+            val movie = it.data
 
-            detailBinding.tvMovieTitle.text = movie.title
-            detailBinding.tvMovieRelease.text = movie.releaseDate
-            detailBinding.tvMovieRuntime.text = movie.runtime.toString()
-            detailBinding.tvMovieTextOverview.text = movie.overview
-            detailBinding.movieRatingBar.rating = (movie.voteAverage / 2)
-            Glide.with(this)
-                .load("$IMG_URL${movie.backdropPath}")
-                .transform(RoundedCorners(20))
-                .into(detailBinding.backdropMovie)
-            Glide.with(this)
-                .load("$IMG_URL${movie.posterPath}")
-                .transform(RoundedCorners(20))
-                .into(detailBinding.detailMoviePoster)
-            detailBinding.progressBar.hide()
+            if (movie != null) {
+                detailBinding.tvMovieTitle.text = movie.title
+                detailBinding.tvMovieRelease.text = movie.releaseDate
+                detailBinding.tvMovieRuntime.text = movie.runtime.toString()
+                detailBinding.tvMovieTextOverview.text = movie.overview
+                detailBinding.movieRatingBar.rating = (movie.voteAverage / 2)
+                Glide.with(this)
+                    .load("$IMG_URL${movie.backdropPath}")
+                    .transform(RoundedCorners(20))
+                    .into(detailBinding.backdropMovie)
+                Glide.with(this)
+                    .load("$IMG_URL${movie.posterPath}")
+                    .transform(RoundedCorners(20))
+                    .into(detailBinding.detailMoviePoster)
+                detailBinding.progressBar.hide()
+            }
         })
     }
 

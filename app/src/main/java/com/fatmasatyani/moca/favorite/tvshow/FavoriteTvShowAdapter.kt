@@ -58,6 +58,7 @@ class FavoriteTvShowAdapter (private val listener: (TvShow) -> Unit) : PagedList
             }
         }
     }
+
     interface OnItemClickCallback {
         fun onItemClicked(id: String)
     }

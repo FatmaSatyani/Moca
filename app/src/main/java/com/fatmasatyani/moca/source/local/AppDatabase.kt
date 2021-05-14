@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.fatmasatyani.moca.dao.MovieDao
 import com.fatmasatyani.moca.dao.TvShowDao
+import com.fatmasatyani.moca.data.FavoriteMovieData
+import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 
 @Database (
-    entities = [Movie::class, TvShow::class],
+    entities = [Movie::class, TvShow::class, FavoriteMovieData::class, FavoriteTvShowData::class],
     version = 2,
     exportSchema = false
         )

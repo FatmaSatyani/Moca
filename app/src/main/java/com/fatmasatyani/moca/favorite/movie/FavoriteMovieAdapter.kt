@@ -43,7 +43,6 @@ class FavoriteMovieAdapter (private val listener: (Movie) -> Unit) : PagedListAd
         }
     }
 
-
     inner class MovieViewHolder(private val binding: FavoriteItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(movie: Movie, listener: (Movie) -> Unit) {
             with(binding) {
@@ -63,7 +62,6 @@ class FavoriteMovieAdapter (private val listener: (Movie) -> Unit) : PagedListAd
     interface OnItemClickCallback {
         fun onItemClicked(id: String)
     }
-
 }
 
 

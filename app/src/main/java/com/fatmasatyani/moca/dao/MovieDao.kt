@@ -1,6 +1,7 @@
 package com.fatmasatyani.moca.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.fatmasatyani.moca.data.FavoriteMovieData
@@ -10,32 +11,23 @@ import com.fatmasatyani.moca.data.Movie
 interface MovieDao {
 
     @Query("SELECT * FROM Movie")
-    fun getList(): LiveData<List<Movie>>
+    fun getList(): DataSource.Factory<Int, Movie>
 
-    @Query ("SELECT * FROM Movie WHERE id = :id")
+    @Query("SELECT * FROM Movie WHERE id = :id")
     fun getMovieById(id: Int) : LiveData<Movie>
 
-    @Insert (onConflict = REPLACE)
-    fun insert (movie: List<Movie>): Long
+    @Insert(onConflict = REPLACE)
+    fun insert (movie: List<Movie>)
 
     @Update
-    fun update (movie: Movie): Int
-
-//    @Delete
-//    fun delete (movie: Movie)
-
-//    @Query("DELETE FROM Movie WHERE id =:id")
-//    fun deleteMovieById (id:Long) : Int
+    fun update(movie: Movie): Int
 
     @Query("SELECT * FROM favorite_movie_data")
-    fun getFavoriteMovie(): LiveData<List<FavoriteMovieData>>
+    fun getFavoriteMovie(): DataSource.Factory<Int, FavoriteMovieData>
 
     @Insert(onConflict = REPLACE)
-    fun addFavoriteMovie (favoriteMovie: Movie)
-
-//    @Query("SELECT * FROM favorite_movie_data WHERE favoriteMovieId=:favoriteMovieId")
-//    fun getSingleMovieFavorite(favoriteMovieId: Int): FavoriteMovieData
+    fun addFavoriteMovie(favoriteMovie: FavoriteMovieData)
 
     @Delete
-    fun removeFavoriteMovie(favorite: Movie)
+    fun removeFavoriteMovie(favorite: FavoriteMovieData)
 }

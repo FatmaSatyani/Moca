@@ -3,6 +3,7 @@ package com.fatmasatyani.moca.source
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.fatmasatyani.moca.data.MovieDetailResponse
+import com.fatmasatyani.moca.source.remote.response.ApiResponse
 import com.fatmasatyani.moca.utils.AppExecutors
 import com.fatmasatyani.moca.vo.Resource
 import com.fatmasatyani.moca.vo.Status
@@ -35,7 +36,7 @@ abstract class NetworkBoundResource<ResultType,RequestType> (private val mExecut
 
         protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-        protected abstract fun createCall(): LiveData<List<MovieDetailResponse>>
+        protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
 
         protected abstract fun saveCallResult(data: RequestType)
 
@@ -75,7 +76,8 @@ abstract class NetworkBoundResource<ResultType,RequestType> (private val mExecut
                 }
             }
         }
+
     fun asLiveData() : LiveData<Resource<ResultType>> = result
-    }
+}
 
 

@@ -29,14 +29,6 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
         return binding?.root
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.getFavMovie().observe(viewLifecycleOwner, { favMovie ->
-//            if (favMovie != null) {
-//                adapter.submitList(favMovie)
-//            }
-//        })
-//    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -54,28 +46,10 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
         }
     }
 
-        private fun obtainViewModel(requireActivity: FragmentActivity): FavoriteMovieViewModel {
-            val factory = ViewModelFactory.getInstance(requireActivity.application)
-            return ViewModelProviders.of(requireActivity, factory)[FavoriteMovieViewModel::class.java]
-        }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        if (activity != null) {
-//            viewModel = obtainViewModel(requireActivity())
-//            viewModel = ViewModelProvider(this,factory) [FavoriteMovieViewModel::class.java]
-//
-//            adapter = FavoriteMovieAdapter()
-//            adapter.setOnItemClickCallback(this)
-//
-//            viewModel.getFavMovie().observe(viewLifecycleOwner, { favMovie ->
-//                if (favMovie != null) {
-//                    adapter.submitList(favMovie)
-//                }
-//            })
-//            }
-//        }
+    private fun obtainViewModel(requireActivity: FragmentActivity): FavoriteMovieViewModel {
+        val factory = ViewModelFactory.getInstance(requireActivity.application)
+        return ViewModelProviders.of(requireActivity, factory)[FavoriteMovieViewModel::class.java]
+    }
 
     override fun onDestroy() {
         super.onDestroy()

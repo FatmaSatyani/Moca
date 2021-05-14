@@ -1,26 +1,23 @@
 package com.fatmasatyani.moca.data
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "favorite_movie_data",
-        primaryKeys = ["favoriteMovieId", "id"],
         foreignKeys = [ForeignKey(entity = Movie::class,
         parentColumns = ["id"],
         childColumns = ["id"])],
         indices = [Index(value = ["favoriteMovieId"]), Index(value = ["id"])])
 data class FavoriteMovieData(
    @NonNull
+   @PrimaryKey(autoGenerate = true)
    @ColumnInfo(name = "favoriteMovieId")
-   var favoriteId: String,
+   var favoriteId: Int,
 
    @NonNull
    @ColumnInfo(name = "id")
-   var movieId: String,
+   var movieId: Int,
 
    @NonNull
    @ColumnInfo(name = "backdrop_path")

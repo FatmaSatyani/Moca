@@ -52,8 +52,7 @@ class TvShowFragment : Fragment() {
     private fun loadTvShow() {
         viewModel.page = page
         viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
-            tvShowList.addAll(tvShow)
-            adapter.setTvShows(tvShowList)
+            adapter.submitList(tvShow.data)
         })
     }
 

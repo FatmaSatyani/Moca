@@ -2,6 +2,7 @@ package com.fatmasatyani.moca.movie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.databinding.FragmentMovieBinding
 import com.fatmasatyani.moca.detail.DetailMovieActivity
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
 
-    private var movieList: MutableList<Movie> = mutableListOf()
     private lateinit var binding: FragmentMovieBinding
     private lateinit var viewModel: MovieViewModel
     private lateinit var adapter: MovieAdapter
@@ -40,6 +39,7 @@ class MovieFragment : Fragment() {
                 val intent = Intent(requireContext(), DetailMovieActivity::class.java)
                 intent.putExtra("movieId", movie.id)
                 startActivity(intent)
+
             }
 
             loadMovie()
@@ -51,9 +51,9 @@ class MovieFragment : Fragment() {
 
     private fun loadMovie() {
         viewModel.page = page
+        Log.d("TAG","Masuk")
         viewModel.getMovie().observe(viewLifecycleOwner, { movie ->
-            movieList.addAll(movie)
-            adapter.setMovies(movieList)
+            adapter.submitList(movie.data)
         })
     }
 

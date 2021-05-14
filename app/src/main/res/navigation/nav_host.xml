@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteTvShowFragment"
-        android:name="com.fatmasatyani.moca.favorite.FavoriteTvShowFragment"
+        android:name="com.fatmasatyani.moca.favorite.tvshow.FavoriteTvShowFragment"
         android:label="fragment_favorite_tv_show"
         tools:layout="@layout/fragment_favorite_tv_show" >
         <action
@@ -49,7 +49,7 @@
             app:destination="@id/detailTvShowActivity" />
     </fragment>
     <activity
-        android:id="@+id/homeActivity3"
+        android:id="@+id/homeActivity"
         android:name="com.fatmasatyani.moca.home.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home" />

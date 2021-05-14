@@ -1,20 +1,15 @@
 package com.fatmasatyani.moca.source.remote
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.fatmasatyani.moca.data.FavoriteMovieData
-import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.data.MovieDetailResponse
-import com.fatmasatyani.moca.data.TvShow
+import com.fatmasatyani.moca.data.*
 import com.fatmasatyani.moca.source.NetworkBoundResource
 import com.fatmasatyani.moca.source.local.LocalDataSource
 import com.fatmasatyani.moca.source.remote.response.ApiResponse
-import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.utils.AppExecutors
-import com.fatmasatyani.moca.utils.EspressoIdlingResource
 import com.fatmasatyani.moca.vo.Resource
-import java.util.*
 
 class MovieCatalogueRepository private constructor(
     private val remoteRepository: RemoteDataSource,
@@ -32,26 +27,25 @@ class MovieCatalogueRepository private constructor(
 
     override fun getListMovies(page: Int): LiveData<Resource<PagedList<Movie>>> {
 
-        return object: NetworkBoundResource<PagedList<Movie>, MovieResponse>(appExecutors) {
-            override fun loadFromDb(): LiveData<PagedList<Movie>> {
+        return object: NetworkBoundResource<PagedList<Movie>, List<MovieDetailResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<PagedList<Movie>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
                     .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
-
-                return LivePagedListBuilder(localRepository.getAllMovies(movieList = ""),config).build()
+                return LivePagedListBuilder(localRepository.getAllMovies(),config).build()
             }
 
             override fun shouldFetch(data: PagedList<Movie>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<List<MovieDetailResponse>> =
+            override fun createCall(): LiveData<ApiResponse<List<MovieDetailResponse>>> =
                 remoteRepository.getMovie()
 
-            override fun saveCallResult(data: MovieResponse) {
+            override fun saveCallResult(data: List<MovieDetailResponse>) {
                 val movieList = mutableListOf<Movie>()
-                data.result.forEach {
+                data.forEach {
                     val movie = Movie (
                         it.id,
                         it.backdropPath,
@@ -69,49 +63,6 @@ class MovieCatalogueRepository private constructor(
         }.asLiveData()
     }
 
-//            override fun loadFromDB(): LiveData<PagedList<Movie>> {
-//                val config = PagedList.Config.Builder()
-//                    .setEnablePlaceholders(false)
-//                    .setInitialLoadSizeHint(4)
-//                    .setPageSize(4)
-//                    .build()
-//
-//                return liveData(localRepository.getAllMovies(movieList), config).build()
-//            }
-
-//            override fun shouldFetch(data: PagedList<Movie>?): Boolean =
-//            override fun saveCallResult(data: MovieResponse) {
-//                val movieList = mutableListOf<Movie>()
-//                    data.result.forEach {
-//                        val movie = Movie(
-//                            id = it.id,
-//                            backdropPath = it.backdropPath,
-//                            overview = it.overview,
-//                            releaseDate = it.releaseDate,
-//                            voteAverage = it.voteAverage,
-//                            runtime = it.runtime,
-//                            title = it.title,
-//                            posterPath = it.posterPath
-//                        )
-//                    movieList.add(movie)
-//                    }
-//                return movieList
-
-//    override fun getListMovies(page: Int): LiveData<List<Movie>> {
-//        return remoteRepository.getMovie().map { it.map { movie->
-//            Movie(
-//                movie.id,
-//                movie.backdropPath,
-//                movie.overview,
-//                movie.releaseDate,
-//                movie.voteAverage,
-//                movie.runtime,
-//                movie.title,
-//                movie.posterPath
-//            )}
-//        }
-//    }
-
     override fun getMovie(id: Int): LiveData<Resource<Movie>> {
         return object : NetworkBoundResource<Movie, MovieDetailResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<Movie> =
@@ -123,7 +74,7 @@ class MovieCatalogueRepository private constructor(
                 remoteRepository.getMovieById(id)
 
             override fun saveCallResult(data: MovieDetailResponse) {
-                val movieList = Movie(
+                val movie = Movie(
                     id = data.id,
                     backdropPath = data.backdropPath,
                     overview = data.overview,
@@ -133,119 +84,176 @@ class MovieCatalogueRepository private constructor(
                     title = data.title,
                     posterPath = data.posterPath
                 )
-//                data.result.forEach {
-//                    val movie = Movie (
-//                        it.id,
-//                        it.backdropPath,
-//                        it.overview,
-//                        it.releaseDate,
-//                        it.voteAverage,
-//                        it.runtime,
-//                        it.title,
-//                        it.posterPath
-//                    )
-//                    movieList.add(movie)
-//                }
-                localRepository.addFavoriteMovie(movieList)
+                val movieList = arrayListOf<Movie>()
+                movieList.add(movie)
+                localRepository.insertMovies(movieList)
             }
         }.asLiveData()
     }
 
-    override fun getListTvShows(page: Int): LiveData<List<TvShow>> {
-        TODO("Not yet implemented")
+    override fun getAllFavoriteMovies(): LiveData<PagedList<FavoriteMovieData>> {
+        val result = MediatorLiveData<PagedList<FavoriteMovieData>>()
+        appExecutors.mainThread().execute {
+            val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setInitialLoadSizeHint(4)
+                .setPageSize(4)
+                .build()
+            val dbSource = LivePagedListBuilder(localRepository.getFavoriteMovies(),config).build()
+            result.addSource(dbSource) { newData ->
+                result.value = newData
+            }
+        }
+        return result
     }
-
-    override fun getTvShow(id: Int): LiveData<TvShow> {
-        TODO("Not yet implemented")
-    }
-
-//    override fun getMovie(id: Int): LiveData<Movie> {
-//        return remoteRepository.getMovieById(id).map { movie ->
-//            Movie(
-//                movie.id,
-//                movie.backdropPath,
-//                movie.overview,
-//                movie.releaseDate,
-//                movie.voteAverage,
-//                movie.runtime,
-//                movie.title,
-//                movie.posterPath
-//            )
-//        }
-//    }
-//    override fun getFavoriteMovie(): LiveData<PagedList<Movie>> {
-//        val config = PagedList.Config.Builder()
-//            .setEnablePlaceholders(false)
-//            .setInitialLoadSizeHint(4)
-//            .setPageSize(4)
-//            .build()
-//        return LivePagedListBuilder(localRepository.getFavoriteMovies(),config).build()
-//    }
-
-//    override fun getListTvShows(page: Int): LiveData<List<TvShow>> {
-//        return remoteRepository.getTvShow().map { it.map { tvShow ->
-//            TvShow(
-//                tvShow.id,
-//                tvShow.backdropPath,
-//                tvShow.overview,
-//                tvShow.firstAirDate,
-//                tvShow.voteAverage,
-//                tvShow.name,
-//                tvShow.posterPath
-//            )}
-//        }
-//    }
-//
-//    override fun getTvShow(id: Int): LiveData<TvShow> {
-//        return remoteRepository.getTvShowById(id).map { tvShow ->
-//            TvShow(
-//                tvShow.id,
-//                tvShow.backdropPath,
-//                tvShow.overview,
-//                tvShow.firstAirDate,
-//                tvShow.voteAverage,
-//                tvShow.name,
-//                tvShow.posterPath
-//            )
-//        }
-//    }
-
-    override fun getAllFavoriteMovies(): LiveData<PagedList<Movie>> {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(4)
-            .setPageSize(4)
-            .build()
-        return LivePagedListBuilder(localRepository.getFavoriteMovies(),config).build()
-    }
-
 
     override fun addFavoriteMovie(movie: Movie) {
-        localRepository.addFavoriteMovie(movie)
+        val favoriteMovieData = FavoriteMovieData(
+            0,
+            movie.id ?: 0,
+            movie.backdropPath ?: "",
+            movie.overview ?: "",
+            movie.releaseDate ?: "",
+            movie.voteAverage,
+            movie.runtime ?: 0,
+            movie.title ?: "",
+            movie.posterPath
+        )
+        localRepository.addFavoriteMovie(favoriteMovieData)
     }
 
     override fun removeFavoriteMovie(movie: Movie) {
-        localRepository.removeFavoriteMovie(movie)
+        val favoriteMovieData = FavoriteMovieData(
+            0,
+            movie.id ?: 0,
+            movie.backdropPath ?: "",
+            movie.overview ?: "",
+            movie.releaseDate ?: "",
+            movie.voteAverage,
+            movie.runtime ?: 0,
+            movie.title ?: "",
+            movie.posterPath
+        )
+        localRepository.removeFavoriteMovie(favoriteMovieData)
     }
 
     override fun isFavoriteMovie(movie: Movie): Boolean =
         localRepository.isFavoriteMovie(movie)
 
-    override fun getAllFavoriteTvShow(): LiveData<PagedList<TvShow>> {
-        localRepository.getFavoriteMovies()
+
+    override fun getListTvShows(page: Int): LiveData<Resource<PagedList<TvShow>>> {
+
+        return object: NetworkBoundResource<PagedList<TvShow>, List<TvShowDetailResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<PagedList<TvShow>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+
+                return LivePagedListBuilder(localRepository.getAllTvShows(),config).build()
+            }
+
+            override fun shouldFetch(data: PagedList<TvShow>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<TvShowDetailResponse>>> =
+                remoteRepository.getTvShow()
+
+            override fun saveCallResult(data: List<TvShowDetailResponse>) {
+                val tvShowList = mutableListOf<TvShow>()
+                data.forEach {
+                    val tvShow = TvShow (
+                        it.id,
+                        it.backdropPath,
+                        it.overview,
+                        it.firstAirDate,
+                        it.voteAverage,
+                        it.name,
+                        it.posterPath
+                    )
+                    tvShowList.add(tvShow)
+                }
+                localRepository.insertTvShow(tvShowList)
+            }
+        }.asLiveData()
+    }
+
+    override fun getTvShow(id: Int): LiveData<Resource<TvShow>> {
+        return object : NetworkBoundResource<TvShow, TvShowDetailResponse>(appExecutors) {
+            override fun loadFromDB(): LiveData<TvShow> =
+                localRepository.getTvShowById(id)
+
+            override fun shouldFetch(data: TvShow?): Boolean = true
+
+            override fun createCall(): LiveData<ApiResponse<TvShowDetailResponse>> =
+                remoteRepository.getTvShowById(id)
+
+            override fun saveCallResult(data: TvShowDetailResponse) {
+                val tvShow = TvShow (
+                    id = data.id,
+                    backdropPath = data.backdropPath,
+                    overview = data.overview,
+                    firstAirDate = data.firstAirDate,
+                    voteAverage = data.voteAverage,
+                    name = data.name,
+                    posterPath = data.posterPath
+                )
+                val tvShowList = arrayListOf<TvShow>()
+                tvShowList.add(tvShow)
+                localRepository.insertTvShow(tvShowList)
+            }
+        }.asLiveData()
+    }
+
+
+    override fun getAllFavoriteTvShow(): LiveData<PagedList<FavoriteTvShowData>> {
+        val result = MediatorLiveData<PagedList<FavoriteTvShowData>>()
+        appExecutors.mainThread().execute {
+            val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setInitialLoadSizeHint(4)
+                .setPageSize(4)
+                .build()
+            val dbSource = LivePagedListBuilder(localRepository.getFavoriteTvShows(),config).build()
+            result.addSource(dbSource) { newData ->
+                result.value = newData
+            }
+        }
+        return result
     }
 
     override fun addFavoriteTvShow(tvShow: TvShow) {
-        TODO("Not yet implemented")
-    }
+        val favoriteTvShowData = FavoriteTvShowData (
+                0,
+                tvShow.id ?: 0,
+                tvShow.backdropPath ?: "",
+                tvShow.overview ?: "",
+                tvShow.firstAirDate?: "",
+                tvShow.voteAverage,
+                tvShow.name?: "",
+                tvShow.posterPath
+            )
+        localRepository.addFavoriteTvShows(favoriteTvShowData)
+        }
 
     override fun removeFavoriteTvShow(tvShow: TvShow) {
-        TODO("Not yet implemented")
+        val favoriteTvShowData = FavoriteTvShowData (
+            0,
+            tvShow.id ?: 0,
+            tvShow.backdropPath ?: "",
+            tvShow.overview ?: "",
+            tvShow.firstAirDate?: "",
+            tvShow.voteAverage,
+            tvShow.name?: "",
+            tvShow.posterPath
+        )
+        localRepository.removeFavoriteTvShow(favoriteTvShowData)
     }
 
-    override fun isFavoriteTvShow(tvShow: TvShow): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isFavoriteTvShow(tvShow: TvShow): Boolean =
+        localRepository.isFavoriteTvShow(tvShow)
+
 }
 
 

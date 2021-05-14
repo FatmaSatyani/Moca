@@ -2,6 +2,7 @@ package com.fatmasatyani.moca.source.local
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.fatmasatyani.moca.dao.MovieDao
 import com.fatmasatyani.moca.dao.TvShowDao
 import com.fatmasatyani.moca.data.FavoriteMovieData
@@ -26,35 +27,34 @@ class LocalDataSource(context: Context) {
         }
     }
 
-    fun getAllMovies(movieList: String): LiveData<List<Movie>> = movieDao.getList()
+    fun getAllMovies(): DataSource.Factory<Int, Movie> = movieDao.getList()
 
     fun getMovieById (id: Int): LiveData<Movie> = movieDao.getMovieById(id)
 
     fun insertMovies (movie: List<Movie>) = movieDao.insert(movie)
 
-    fun getFavoriteMovies(): LiveData<List<FavoriteMovieData>> = movieDao.getFavoriteMovie()
+    fun getFavoriteMovies(): DataSource.Factory<Int, FavoriteMovieData> = movieDao.getFavoriteMovie()
 
-    fun addFavoriteMovie (favoriteMovie: Movie) = movieDao.addFavoriteMovie(favoriteMovie)
+    fun addFavoriteMovie (favoriteMovie: FavoriteMovieData) = movieDao.addFavoriteMovie(favoriteMovie)
 
     fun isFavoriteMovie (movie: Movie): Boolean {
         return movie.id?.let { movieDao.getMovieById(it) } != null}
 
-    fun removeFavoriteMovie (favMovieId: Movie) = movieDao.removeFavoriteMovie(favMovieId)
+    fun removeFavoriteMovie (favMovieId: FavoriteMovieData) = movieDao.removeFavoriteMovie(favMovieId)
 
-    fun getAllTvShows () : LiveData<List<TvShow>> = tvShowDao.getList()
 
-    fun getTvShowById (id: Int): TvShow = tvShowDao.getTvShowById(id)
+    fun getAllTvShows () : DataSource.Factory<Int, TvShow> = tvShowDao.getList()
+
+    fun getTvShowById (id: Int): LiveData<TvShow> = tvShowDao.getTvShowById(id)
 
     fun insertTvShow (tvShow: List<TvShow>) = tvShowDao.insert(tvShow)
 
-    fun getFavoriteTvShows(): LiveData<List<FavoriteTvShowData>> = tvShowDao.getFavoriteTvShow()
+    fun getFavoriteTvShows(): DataSource.Factory<Int, FavoriteTvShowData> = tvShowDao.getFavoriteTvShow()
 
-    fun addFavoriteTvShows (favoriteTvShow: TvShow) = tvShowDao.addFavoriteTvShow(favoriteTvShow)
+    fun addFavoriteTvShows (favoriteTvShow: FavoriteTvShowData) = tvShowDao.addFavoriteTvShow(favoriteTvShow)
 
     fun isFavoriteTvShow (tvShow: TvShow): Boolean {
         return tvShow.id?.let { tvShowDao.getTvShowById(it) } != null}
 
-    fun getSingleFavoriteTvShow (favTvShowId: Int): FavoriteTvShowData = tvShowDao.getSingleTvShowFavorite(favTvShowId)
-
-    fun removeFavoriteTvShow (favTvShowId: Int) = tvShowDao.removeFavoriteTvShow(favTvShowId)
+    fun removeFavoriteTvShow (favTvShowId: FavoriteTvShowData) = tvShowDao.removeFavoriteTvShow(favTvShowId)
 }

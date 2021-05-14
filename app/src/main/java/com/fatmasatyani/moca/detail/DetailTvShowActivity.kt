@@ -32,30 +32,30 @@ class DetailTvShowActivity : AppCompatActivity() {
         detailBinding.progressBar.show()
 
         tvShowId = intent.getIntExtra("tvShowId", 0)
-        Log.d("TESTING","$tvShowId")
 
         detailViewModel = obtainViewModel(this)
         detailViewModel.tvShowId = tvShowId
 
-        detailViewModel.setSelectedTvShow().observe(this, { tvShow ->
-            aTvShow = tvShow
+        detailViewModel.setSelectedTvShow().observe(this, {
+            val tvShow = it.data
 
-            detailBinding.tvTvShowTitle.text = tvShow.name
-            detailBinding.tvTvShowRelease.text = tvShow.firstAirDate
-            detailBinding.tvTvShowTextOverview.text = tvShow.overview
-            detailBinding.tvShowRatingBar.rating = (tvShow.voteAverage / 2)
-            Glide.with(this)
-                .load("$IMG_URL${tvShow.backdropPath}")
-                .transform(RoundedCorners(20))
-                .into(detailBinding.backdropTvShow)
-            Glide.with(this)
-                .load("$IMG_URL${tvShow.posterPath}")
-                .transform(RoundedCorners(20))
-                .into(detailBinding.detailTvShowPoster)
-            detailBinding.progressBar.hide()
+            if (tvShow != null) {
+                detailBinding.tvTvShowTitle.text = tvShow.name
+                detailBinding.tvTvShowRelease.text = tvShow.firstAirDate
+                detailBinding.tvTvShowTextOverview.text = tvShow.overview
+                detailBinding.tvShowRatingBar.rating = (tvShow.voteAverage / 2)
+                Glide.with(this)
+                    .load("$IMG_URL${tvShow.backdropPath}")
+                    .transform(RoundedCorners(20))
+                    .into(detailBinding.backdropTvShow)
+                Glide.with(this)
+                    .load("$IMG_URL${tvShow.posterPath}")
+                    .transform(RoundedCorners(20))
+                    .into(detailBinding.detailTvShowPoster)
+                detailBinding.progressBar.hide()
+            }
         })
     }
-
 
     private fun obtainViewModel(detailActivity: DetailTvShowActivity): DetailTvShowViewModel {
         val factory = ViewModelFactory.getInstance(detailActivity.application)

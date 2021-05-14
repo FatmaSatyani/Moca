@@ -23,8 +23,8 @@ class RemoteDataSource {
         }
     }
 
-    fun getMovie (): LiveData<List<MovieDetailResponse>> {
-        val movie: MutableLiveData<List<MovieDetailResponse>> = MutableLiveData()
+    fun getMovie (): LiveData<ApiResponse<List<MovieDetailResponse>>> {
+        val movie: MutableLiveData<ApiResponse<List<MovieDetailResponse>>> = MutableLiveData()
         EspressoIdlingResource.increment()
 
         apiConfig.popularMovie(API_KEY).enqueue(
@@ -33,7 +33,7 @@ class RemoteDataSource {
                     call: Call<MovieResponse>,
                     response: Response<MovieResponse>
                 ) {
-                    response.body()?.let { movie.postValue(it.result) }
+                    response.body()?.let { movie.postValue(ApiResponse.success(it.result)) }
                     EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
@@ -61,8 +61,8 @@ class RemoteDataSource {
         return movieById
     }
 
-    fun getTvShow (): LiveData<List<TvShowDetailResponse>> {
-        val tvShow: MutableLiveData<List<TvShowDetailResponse>> = MutableLiveData()
+    fun getTvShow (): LiveData<ApiResponse<List<TvShowDetailResponse>>> {
+        val tvShow: MutableLiveData<ApiResponse<List<TvShowDetailResponse>>> = MutableLiveData()
         EspressoIdlingResource.increment()
 
         apiConfig.popularTvShow(API_KEY).enqueue(
@@ -71,7 +71,7 @@ class RemoteDataSource {
                     call: Call<TvResponse>,
                     response: Response<TvResponse>
                 ) {
-                    response.body()?.let { tvShow.postValue(it.result) }
+                    response.body()?.let { tvShow.postValue(ApiResponse.success(it.result)) }
                     EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<TvResponse>, t: Throwable) {
@@ -81,14 +81,14 @@ class RemoteDataSource {
         return tvShow
     }
 
-    fun getTvShowById(id:Int) : LiveData<TvShowDetailResponse> {
-        val tvShowById: MutableLiveData<TvShowDetailResponse> = MutableLiveData()
+    fun getTvShowById(id:Int) : LiveData<ApiResponse<TvShowDetailResponse>> {
+        val tvShowById: MutableLiveData<ApiResponse<TvShowDetailResponse>> = MutableLiveData()
         EspressoIdlingResource.increment()
 
         apiConfig.tvShow(id, API_KEY).enqueue(
             object : Callback<TvShowDetailResponse> {
                 override fun onResponse(call: Call<TvShowDetailResponse>, response: Response<TvShowDetailResponse>) {
-                    tvShowById.postValue(response.body())
+                    tvShowById.postValue(ApiResponse.success(response.body() as TvShowDetailResponse))
                     EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<TvShowDetailResponse>, t: Throwable) {

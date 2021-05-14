@@ -2,21 +2,19 @@ package com.fatmasatyani.moca.source.remote
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import com.fatmasatyani.moca.data.FavoriteMovieData
+import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.vo.Resource
 
 interface MovieCatalogueDataSource {
 
-    fun getListMovies (page: Int) : LiveData<Resource<List<Movie>>>
+    fun getListMovies (page: Int) : LiveData<Resource<PagedList<Movie>>>
 
     fun getMovie (id: Int) : LiveData<Resource<Movie>>
 
-    fun getListTvShows (page: Int) : LiveData<List<TvShow>>
-
-    fun getTvShow(id: Int) : LiveData<TvShow>
-
-    fun getAllFavoriteMovies(): LiveData<PagedList<Movie>>
+    fun getAllFavoriteMovies(): LiveData<PagedList<FavoriteMovieData>>
 
     fun addFavoriteMovie(movie: Movie)
 
@@ -24,7 +22,12 @@ interface MovieCatalogueDataSource {
 
     fun isFavoriteMovie(movie: Movie): Boolean
 
-    fun getAllFavoriteTvShow(): LiveData<PagedList<TvShow>>
+
+    fun getListTvShows (page: Int) : LiveData<Resource<PagedList<TvShow>>>
+
+    fun getTvShow(id: Int) : LiveData<Resource<TvShow>>
+
+    fun getAllFavoriteTvShow(): LiveData<PagedList<FavoriteTvShowData>>
 
     fun addFavoriteTvShow (tvShow: TvShow)
 
