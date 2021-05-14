@@ -7,10 +7,10 @@ import com.fatmasatyani.moca.detail.DetailMovieViewModel
 import com.fatmasatyani.moca.detail.DetailTvShowViewModel
 import com.fatmasatyani.moca.di.Injection
 import com.fatmasatyani.moca.movie.MovieViewModel
-import com.fatmasatyani.moca.source.remote.ListRepository
+import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.tvshow.TvShowViewModel
 
-class ViewModelFactory private constructor(private val listRepository: ListRepository): ViewModelProvider.NewInstanceFactory(){
+class ViewModelFactory private constructor(private val listRepository: MovieCatalogueRepository): ViewModelProvider.NewInstanceFactory(){
 
     companion object {
         @Volatile
@@ -22,6 +22,7 @@ class ViewModelFactory private constructor(private val listRepository: ListRepos
                     instance = this
                 }
         }
+
     }
 
     @Suppress("UNCHECKED_CAST")

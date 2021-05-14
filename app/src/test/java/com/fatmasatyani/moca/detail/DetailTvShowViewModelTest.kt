@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.source.remote.ListRepository
+import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.utils.FakeData
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -18,7 +18,7 @@ class DetailTvShowViewModelTest {
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var viewModel: DetailTvShowViewModel
-    private var repository = Mockito.mock(ListRepository::class.java)
+    private var repository = Mockito.mock(MovieCatalogueRepository::class.java)
     private var dataDummyTvShow = FakeData.generateDummyTvShow()
     private var tvShowId = dataDummyTvShow[1]
 

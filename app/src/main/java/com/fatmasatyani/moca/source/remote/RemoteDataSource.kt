@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.data.TvShowDetailResponse
+import com.fatmasatyani.moca.source.remote.response.ApiResponse
 import com.fatmasatyani.moca.source.remote.response.MovieResponse
 import com.fatmasatyani.moca.source.remote.response.TvResponse
 import com.fatmasatyani.moca.utils.Constant.Companion.API_KEY
@@ -12,13 +13,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteRepository {
+class RemoteDataSource {
 
     private val apiConfig = ApiConfig.getApiService()
 
     companion object {
-        fun getInstance(): RemoteRepository {
-            return RemoteRepository()
+        fun getInstance(): RemoteDataSource {
+            return RemoteDataSource()
         }
     }
 
@@ -42,14 +43,15 @@ class RemoteRepository {
         return movie
     }
 
-    fun getMovieById(id: Int): LiveData<MovieDetailResponse> {
-        val movieById: MutableLiveData<MovieDetailResponse> = MutableLiveData()
+    fun getMovieById(id: Int): LiveData<ApiResponse<MovieDetailResponse>> {
+        val movieById = MutableLiveData<ApiResponse<MovieDetailResponse>>()
+//        val movieById: MutableLiveData<MovieDetailResponse> = MutableLiveData()
         EspressoIdlingResource.increment()
 
         apiConfig.movie(id, API_KEY).enqueue(
             object : Callback<MovieDetailResponse> {
                 override fun onResponse(call: Call<MovieDetailResponse>, response: Response<MovieDetailResponse>) {
-                    movieById.postValue(response.body())
+                    movieById.value = ApiResponse.success(response.body() as MovieDetailResponse)
                     EspressoIdlingResource.decrement()
                 }
                 override fun onFailure(call: Call<MovieDetailResponse>, t: Throwable) {

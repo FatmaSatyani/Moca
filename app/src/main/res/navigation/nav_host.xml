@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/homeActivity">
+    <activity
+        android:id="@+id/detailMovieActivity"
+        android:name="com.fatmasatyani.moca.detail.DetailMovieActivity"
+        android:label="DetailMovieActivity" />
+    <activity
+        android:id="@+id/detailTvShowActivity"
+        android:name="com.fatmasatyani.moca.detail.DetailTvShowActivity"
+        android:label="DetailTvShowActivity" />
+    <fragment
+        android:id="@+id/movieFragment2"
+        android:name="com.fatmasatyani.moca.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment2_to_detailMovieActivity"
+            app:destination="@id/detailMovieActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.fatmasatyani.moca.tvshow.TvShowFragment"
+        android:label="fragment_tv_show"
+        tools:layout="@layout/fragment_tv_show" >
+        <action
+            android:id="@+id/action_tvShowFragment_to_detailTvShowActivity"
+            app:destination="@id/detailTvShowActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteMovieFragment"
+        android:name="com.fatmasatyani.moca.favorite.movie.FavoriteMovieFragment"
+        android:label="fragment_favorite_movie"
+        tools:layout="@layout/fragment_favorite_movie" >
+        <action
+            android:id="@+id/action_favoriteMovieFragment_to_detailMovieActivity"
+            app:destination="@id/detailMovieActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteTvShowFragment"
+        android:name="com.fatmasatyani.moca.favorite.FavoriteTvShowFragment"
+        android:label="fragment_favorite_tv_show"
+        tools:layout="@layout/fragment_favorite_tv_show" >
+        <action
+            android:id="@+id/action_favoriteTvShowFragment_to_detailTvShowActivity"
+            app:destination="@id/detailTvShowActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/homeActivity3"
+        android:name="com.fatmasatyani.moca.home.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
+</navigation>

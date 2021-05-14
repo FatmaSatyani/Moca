@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.ListRepository
+import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.utils.FakeData
 import org.junit.Before
 import org.junit.Rule
@@ -17,7 +17,7 @@ class MovieViewModelTest {
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var viewModel: MovieViewModel
-    private var repository = mock(ListRepository::class.java)
+    private var repository = mock(MovieCatalogueRepository::class.java)
     @Before
     fun setUp() {
         viewModel = MovieViewModel(repository)

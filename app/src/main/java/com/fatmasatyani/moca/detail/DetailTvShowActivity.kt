@@ -15,6 +15,10 @@ import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class DetailTvShowActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_TVSHOW = "extra_tvshow"
+    }
+
     private var tvShowId: Int = 1
     private lateinit var detailViewModel: DetailTvShowViewModel
     private lateinit var aTvShow: TvShow

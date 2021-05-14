@@ -3,9 +3,9 @@ package com.fatmasatyani.moca.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.ListRepository
+import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 
-class DetailMovieViewModel(private val listRepository: ListRepository) : ViewModel() {
+class DetailMovieViewModel(private val listRepository: MovieCatalogueRepository) : ViewModel() {
 
     var movieId: Int = 0
 

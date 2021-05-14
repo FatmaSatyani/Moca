@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.fatmasatyani.moca.R
+import com.fatmasatyani.moca.favorite.FavoriteFragment
 import com.fatmasatyani.moca.movie.MovieFragment
 import com.fatmasatyani.moca.tvshow.TvShowFragment
 
@@ -13,7 +14,7 @@ class SectionPagerAdapter (private val mContext: Context, fm: FragmentManager) :
 
     companion object {
         @StyleRes
-        private val TAB_TITLES = intArrayOf(R.string.movie, R.string.tvshow)
+        private val TAB_TITLES = intArrayOf(R.string.movie, R.string.tvshow, R.string.favorite)
     }
 
     override fun getCount(): Int = TAB_TITLES.size
@@ -22,6 +23,7 @@ class SectionPagerAdapter (private val mContext: Context, fm: FragmentManager) :
         when (position) {
             0 -> MovieFragment ()
             1 -> TvShowFragment ()
+            2 -> FavoriteFragment()
             else -> Fragment()
         }
 

@@ -14,6 +14,10 @@ import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class DetailMovieActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_MOVIE = "extra_movie"
+    }
+
     private var movieId: Int = 1
     private lateinit var detailViewModel: DetailMovieViewModel
     private lateinit var aMovie: Movie

@@ -3,9 +3,9 @@ package com.fatmasatyani.moca.tvshow
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.source.remote.ListRepository
+import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 
-class TvShowViewModel(private val listRepository: ListRepository) : ViewModel() {
+class TvShowViewModel(private val listRepository: MovieCatalogueRepository) : ViewModel() {
 
     var page = 1
 
