@@ -22,6 +22,8 @@ interface MovieCatalogueDataSource {
 
     fun isFavoriteMovie(movie: Movie): Boolean
 
+    fun isFavoriteMovieById (movie: Movie) : Boolean
+
 
     fun getListTvShows (page: Int) : LiveData<Resource<PagedList<TvShow>>>
 
@@ -34,4 +36,6 @@ interface MovieCatalogueDataSource {
     fun removeFavoriteTvShow (tvShow: TvShow)
 
     fun isFavoriteTvShow (tvShow: TvShow) : Boolean
+
+    fun isFavoriteTvShowById (tvShow: TvShow): Boolean
 }

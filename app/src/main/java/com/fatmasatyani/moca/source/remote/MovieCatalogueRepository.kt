@@ -140,6 +140,8 @@ class MovieCatalogueRepository private constructor(
     override fun isFavoriteMovie(movie: Movie): Boolean =
         localRepository.isFavoriteMovie(movie)
 
+    override fun isFavoriteMovieById(movie: Movie): Boolean =
+        localRepository.isFavoriteMovieById(movie)
 
     override fun getListTvShows(page: Int): LiveData<Resource<PagedList<TvShow>>> {
 
@@ -253,6 +255,9 @@ class MovieCatalogueRepository private constructor(
 
     override fun isFavoriteTvShow(tvShow: TvShow): Boolean =
         localRepository.isFavoriteTvShow(tvShow)
+
+    override fun isFavoriteTvShowById(tvShow: TvShow): Boolean =
+        localRepository.isFavoriteTvShowById(tvShow)
 
 }
 

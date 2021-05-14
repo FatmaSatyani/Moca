@@ -25,6 +25,9 @@ interface MovieDao {
     @Query("SELECT * FROM favorite_movie_data")
     fun getFavoriteMovie(): DataSource.Factory<Int, FavoriteMovieData>
 
+    @Query("SELECT * FROM favorite_movie_data")
+    fun getFavoriteMovieById(): DataSource.Factory<Int, FavoriteMovieData>
+
     @Insert(onConflict = REPLACE)
     fun addFavoriteMovie(favoriteMovie: FavoriteMovieData)
 

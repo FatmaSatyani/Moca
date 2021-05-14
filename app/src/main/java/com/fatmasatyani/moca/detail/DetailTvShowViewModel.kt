@@ -20,7 +20,7 @@ class DetailTvShowViewModel(private val listRepository: MovieCatalogueRepository
     }
 
     fun isFavorite(tvShow: TvShow): Boolean {
-        return listRepository.isFavoriteTvShow(tvShow)
+        return listRepository.isFavoriteTvShowById(tvShow)
     }
 
     fun setSelectedTvShow(): LiveData<Resource<TvShow>> {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
+import com.fatmasatyani.moca.data.FavoriteMovieData
 import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.TvShow
 
@@ -24,6 +25,9 @@ interface TvShowDao {
 
     @Query("SELECT * FROM favorite_tv_Show_data")
     fun getFavoriteTvShow(): DataSource.Factory<Int, FavoriteTvShowData>
+
+    @Query("SELECT * FROM favorite_tv_Show_data")
+    fun getFavoriteTvShowById(): DataSource.Factory<Int, FavoriteTvShowData>
 
     @Insert(onConflict = REPLACE)
     fun addFavoriteTvShow(favoriteTvShow: FavoriteTvShowData)

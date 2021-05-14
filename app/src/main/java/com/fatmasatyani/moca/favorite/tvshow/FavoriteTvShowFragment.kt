@@ -41,6 +41,7 @@ class FavoriteTvShowFragment : Fragment() , FavoriteTvShowAdapter.OnItemClickCal
                 intent.putExtra("tvShowId", tvShow.tvShowId)
                 startActivity(intent)
             }
+            adapter.setOnItemClickCallback(this)
 
             viewModel.getFavTvShow().observe(viewLifecycleOwner, {
                 if (it != null) {

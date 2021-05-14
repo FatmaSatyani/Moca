@@ -26,7 +26,7 @@ class DetailMovieViewModel(private val listRepository: MovieCatalogueRepository)
     }
 
     fun isFavorite(movie: Movie): Boolean {
-        return listRepository.isFavoriteMovie(movie)
+        return listRepository.isFavoriteMovieById(movie)
     }
 
     fun setSelectedMovie(): LiveData<Resource<Movie>> {

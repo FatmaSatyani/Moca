@@ -40,6 +40,7 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
                 intent.putExtra("movieId", movie.movieId)
                 startActivity(intent)
             }
+            adapter.setOnItemClickCallback(this)
 
             viewModel.getFavMovie().observe(viewLifecycleOwner, {
                 if (it != null) {

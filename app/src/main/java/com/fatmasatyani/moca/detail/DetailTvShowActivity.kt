@@ -44,6 +44,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
 
             if (tvShow != null) {
+                mTvShow = tvShow
                 detailBinding.tvTvShowTitle.text = tvShow.name
                 detailBinding.tvTvShowRelease.text = tvShow.firstAirDate
                 detailBinding.tvTvShowTextOverview.text = tvShow.overview

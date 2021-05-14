@@ -40,6 +40,9 @@ class LocalDataSource(context: Context) {
     fun isFavoriteMovie (movie: Movie): Boolean {
         return movie.id?.let { movieDao.getMovieById(it) } != null}
 
+    fun isFavoriteMovieById (movie: Movie): Boolean {
+        return movie.id?.let { movieDao.getMovieById(it) } != null}
+
     fun removeFavoriteMovie (favMovieId: FavoriteMovieData) = movieDao.removeFavoriteMovie(favMovieId)
 
 
@@ -54,6 +57,9 @@ class LocalDataSource(context: Context) {
     fun addFavoriteTvShows (favoriteTvShow: FavoriteTvShowData) = tvShowDao.addFavoriteTvShow(favoriteTvShow)
 
     fun isFavoriteTvShow (tvShow: TvShow): Boolean {
+        return tvShow.id?.let { tvShowDao.getTvShowById(it) } != null}
+
+    fun isFavoriteTvShowById (tvShow: TvShow): Boolean {
         return tvShow.id?.let { tvShowDao.getTvShowById(it) } != null}
 
     fun removeFavoriteTvShow (favTvShowId: FavoriteTvShowData) = tvShowDao.removeFavoriteTvShow(favTvShowId)

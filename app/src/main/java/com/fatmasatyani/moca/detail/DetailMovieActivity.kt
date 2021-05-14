@@ -43,6 +43,7 @@ class DetailMovieActivity : AppCompatActivity() {
             val movie = it.data
 
             if (movie != null) {
+                mMovie = movie
                 detailBinding.tvMovieTitle.text = movie.title
                 detailBinding.tvMovieRelease.text = movie.releaseDate
                 detailBinding.tvMovieRuntime.text = movie.runtime.toString()
