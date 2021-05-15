@@ -3,6 +3,7 @@ package com.fatmasatyani.moca.utils
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
+import com.fatmasatyani.moca.vo.Resource
 
 object FakeData {
 

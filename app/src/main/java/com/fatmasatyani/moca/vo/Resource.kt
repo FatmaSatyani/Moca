@@ -1,8 +1,10 @@
 package com.fatmasatyani.moca.vo
 
+import com.fatmasatyani.moca.data.Movie
+
 data class Resource<T>(val status: Status, val data: T?, val message: String?) {
     companion object {
-        fun <T> success(data: T?): Resource<T> = Resource(Status.SUCCESS, data, null)
+        fun <T> success(data: T?): Movie = Resource(Status.SUCCESS, data, null)
 
         fun <T> error(msg: String?, data: T?): Resource<T> = Resource(Status.ERROR, data, msg)
 

@@ -35,26 +35,35 @@ class DetailMovieViewModelTest {
 
     @Test
     fun getMovie() {
-        val movie: MutableLiveData<Resource<Movie>> = MutableLiveData()
-//        movie.postValue (movieId)
-//        `when`(repository.getMovie(1)).thenReturn(movie)
-//
-//        val observer = mock (Observer::class.java) as Observer<Resource<Movie>>
-//        viewModel.setSelectedMovie().observeForever(observer)
-//        verify(observer).onChanged(movieId)
-//
-//        assertNotNull(viewModel.setSelectedMovie().value)
-//        val movieResult = viewModel.setSelectedMovie().value
-//        assertNotNull(movieResult)
-//        assertEquals(movieId.id,movieResult?.id)
-//        assertEquals(movieId.title,movieResult?.title)
-//        assertEquals(movieId.backdropPath, movieResult?.backdropPath)
-//        assertEquals(movieId.overview,movieResult?.overview)
-//        assertEquals(movieId.posterPath, movieResult?.posterPath)
-//        assertEquals(movieId.releaseDate,movieResult?.releaseDate)
-//        assertEquals(movieId.runtime, movieResult?.runtime)
-//        assertEquals(movieId.voteAverage, movieResult?.voteAverage)
+//        val dummyMovie = Resource.success(FakeData.generateDummyMovie())
+//        val movie = MutableLiveData<Resource<Movie>>()
+//        movie.value = dummyMovie
+
+//        val resourceMovie: Resource<Movie> = Resource.success(dataDummyMovie)
+//        val movie: MutableLiveData<Resource<Movie>> = MutableLiveData<Resource<Movie>>()
+//        movie.setValue(resourceMovie)
+
+        val movie: MutableLiveData<Movie> = MutableLiveData()
+        movie.postValue (movieId)
+        `when`(repository.getMovie(1)).thenReturn(movie)
+
+        val observer = mock(Observer::class.java) as Observer<Resource<Movie>>
+        viewModel.setSelectedMovie().observeForever(observer)
+        verify(observer).onChanged(movieId)
+
+        assertNotNull(viewModel.setSelectedMovie().value)
+        val movieResult = viewModel.setSelectedMovie().value
+        assertNotNull(movieResult)
+        assertEquals(movieId.id, movieResult?.id)
+        assertEquals(movieId.title, movieResult?.title)
+        assertEquals(movieId.backdropPath, movieResult?.backdropPath)
+        assertEquals(movieId.overview, movieResult?.overview)
+        assertEquals(movieId.posterPath, movieResult?.posterPath)
+        assertEquals(movieId.releaseDate, movieResult?.releaseDate)
+        assertEquals(movieId.runtime, movieResult?.runtime)
+        assertEquals(movieId.voteAverage, movieResult?.voteAverage)
     }
 }
+
 
 
