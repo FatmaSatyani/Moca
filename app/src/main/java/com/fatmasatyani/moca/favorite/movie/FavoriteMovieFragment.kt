@@ -10,13 +10,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fatmasatyani.moca.databinding.FragmentFavoriteMovieBinding
 import com.fatmasatyani.moca.databinding.FragmentMovieBinding
 import com.fatmasatyani.moca.detail.DetailMovieActivity
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallback {
 
-    private var _favoriteMovieFragmentBinding: FragmentMovieBinding? = null
+    private var _favoriteMovieFragmentBinding: FragmentFavoriteMovieBinding? = null
     private val binding get() = _favoriteMovieFragmentBinding
 
     private lateinit var viewModel: FavoriteMovieViewModel
@@ -26,7 +27,7 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _favoriteMovieFragmentBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        _favoriteMovieFragmentBinding = FragmentFavoriteMovieBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
@@ -47,9 +48,9 @@ class FavoriteMovieFragment : Fragment(), FavoriteMovieAdapter.OnItemClickCallba
                 adapter.submitList(it)}
             })
 
-            binding?.rvMovies?.adapter = adapter
-            binding?.rvMovies?.layoutManager = LinearLayoutManager(requireContext())
-            binding?.rvMovies?.setHasFixedSize(true)
+            binding?.rvFavoriteMovie?.adapter = adapter
+            binding?.rvFavoriteMovie?.layoutManager = LinearLayoutManager(requireContext())
+            binding?.rvFavoriteMovie?.setHasFixedSize(true)
         }
     }
 

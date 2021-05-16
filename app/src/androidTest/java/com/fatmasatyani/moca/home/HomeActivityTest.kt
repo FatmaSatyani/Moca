@@ -48,7 +48,7 @@ class HomeActivityTest {
     @Test
     fun loadTvShow() {
         onView(withText("TV SHOW")).perform(click())
-        onView(allOf(withId(R.id.rv_tvShows))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
+        onView(allOf(withId(R.id.rv_tvShows))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
         onView(withId(R.id.rv_tvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShow.size))
     }
 

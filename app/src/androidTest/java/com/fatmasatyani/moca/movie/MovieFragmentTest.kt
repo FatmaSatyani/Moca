@@ -47,6 +47,7 @@ class MovieFragmentTest {
 
     @Test
     fun loadMovies() {
+
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovie.size))
     }

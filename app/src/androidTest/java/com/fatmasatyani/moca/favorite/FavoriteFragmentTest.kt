@@ -45,7 +45,7 @@ class FavoriteFragmentTest {
     }
 
     fun loadTvShow() {
-        onView(withText("TV SHOW")).perform(click())
+        onView(withText("FAV TV SHOW")).perform(click())
         onView(allOf(withId(R.id.rv_favorite_tv_show))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
         onView(withId(R.id.rv_favorite_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
     }
