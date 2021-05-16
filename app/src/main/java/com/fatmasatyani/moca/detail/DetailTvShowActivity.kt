@@ -76,11 +76,11 @@ class DetailTvShowActivity : AppCompatActivity() {
     private fun fabOnClick() {
         if (detailViewModel.isFavorite(mTvShow)) {
             detailViewModel.removeFavorite(mTvShow)
-            Snackbar.make(detailBinding.scrollView,"{mTvShow.name} removed from Favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(detailBinding.scrollView,"${mTvShow.name} removed from Favorite", Snackbar.LENGTH_SHORT).show()
             detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
         } else {
             detailViewModel.addFavorite(mTvShow)
-            Snackbar.make(detailBinding.scrollView, "{mTvShow.name} added to Favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(detailBinding.scrollView, "${mTvShow.name} added to Favorite", Snackbar.LENGTH_SHORT).show()
             detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
         }
     }

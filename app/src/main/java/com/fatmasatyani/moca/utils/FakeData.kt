@@ -1,9 +1,13 @@
 package com.fatmasatyani.moca.utils
 
+import com.fatmasatyani.moca.data.FavoriteMovieData
+import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
+import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
-import com.fatmasatyani.moca.vo.Resource
+import java.util.*
+import kotlin.collections.ArrayList
 
 object FakeData {
 
@@ -26,6 +30,55 @@ object FakeData {
         return movie
     }
 
+    fun getSingleDummyMovie(): Movie {
+        return Movie(
+                1,
+            "$IMG_URL/n2y7T8wJVjJ8yLhQXQgNCpsC3ga.jpg",
+        "Set before the events of ‘Soul’, 22 refuses to go to Earth, enlisting a gang of 5 new souls in attempt of rebellion. However, 22’s subversive plot leads to a surprising revelation about the meaning of life.",
+            "2021-04-30",
+            7.3f,
+            9,
+            "22 vs. Earth",
+            "$IMG_URL/32vLDKSzcCMh55zqqaSqqUA8naz.jpg"
+                )
+    }
+
+    fun getFavoriteDummyMovie(): List<FavoriteMovieData> {
+        val favorite = arrayListOf<FavoriteMovieData>()
+        for (n in 1..8) {
+            favorite.add(
+                FavoriteMovieData(
+                    n,
+                    n,
+                    "$IMG_URL/n2y7T8wJVjJ8yLhQXQgNCpsC3ga.jpg",
+                    "Set before the events of ‘Soul’, 22 refuses to go to Earth, enlisting a gang of 5 new souls in attempt of rebellion. However, 22’s subversive plot leads to a surprising revelation about the meaning of life.",
+                    "2021-04-30",
+                    7.3f,
+                    9,
+                    "22 vs. Earth",
+                    "$IMG_URL/32vLDKSzcCMh55zqqaSqqUA8naz.jpg"
+                        )
+            )
+        }
+        return favorite
+    }
+
+    fun getSingleFavoriteMovie(): FavoriteMovieData {
+        return FavoriteMovieData(
+            1,
+            1,
+            "$IMG_URL/n2y7T8wJVjJ8yLhQXQgNCpsC3ga.jpg",
+            "Set before the events of ‘Soul’, 22 refuses to go to Earth, enlisting a gang of 5 new souls in attempt of rebellion. However, 22’s subversive plot leads to a surprising revelation about the meaning of life.",
+            "2021-04-30",
+            7.3f,
+            9,
+            "22 vs. Earth",
+            "$IMG_URL/32vLDKSzcCMh55zqqaSqqUA8naz.jpg"
+        )
+    }
+
+    //TV SHOW
+
     fun generateDummyTvShow(): ArrayList<TvShow> {
         val tvShow = arrayListOf<TvShow>()
         for (n in 1..8) {
@@ -42,6 +95,50 @@ object FakeData {
             )
         }
         return tvShow
+    }
+
+    fun getSingleDummyTvShow(): TvShow{
+        return TvShow(
+            1,
+            "$IMG_URL/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg",
+            "Shaun struggles with his role as Lea's partner after complications arise with the pregnancy and his instincts as a medical professional kick in. Meanwhile, Dr. Park, Dr. Andrews and Asher disagree on how to address an elderly patient's wishes.",
+            "2017-09-25",
+            8.6f,
+            "The Good Doctor",
+            "$IMG_URL/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg"
+        )
+    }
+
+    fun getFavoriteDummyTvShow(): List<FavoriteTvShowData> {
+        val favorite = arrayListOf<FavoriteTvShowData>()
+        for (n in 1..8) {
+            favorite.add(
+                FavoriteTvShowData(
+                    n,
+                    n,
+                    "$IMG_URL/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg",
+                    "Shaun struggles with his role as Lea's partner after complications arise with the pregnancy and his instincts as a medical professional kick in. Meanwhile, Dr. Park, Dr. Andrews and Asher disagree on how to address an elderly patient's wishes.",
+                    "2017-09-25",
+                    8.6f,
+                    "The Good Doctor",
+                    "$IMG_URL/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg"
+                )
+            )
+        }
+        return favorite
+    }
+
+    fun getSingleFavoriteTvShow() : FavoriteTvShowData {
+        return FavoriteTvShowData(
+            1,
+            1,
+            "$IMG_URL/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg",
+            "Shaun struggles with his role as Lea's partner after complications arise with the pregnancy and his instincts as a medical professional kick in. Meanwhile, Dr. Park, Dr. Andrews and Asher disagree on how to address an elderly patient's wishes.",
+            "2017-09-25",
+            8.6f,
+            "The Good Doctor",
+            "$IMG_URL/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg"
+        )
     }
 }
 

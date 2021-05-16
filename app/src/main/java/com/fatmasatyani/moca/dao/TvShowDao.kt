@@ -26,12 +26,12 @@ interface TvShowDao {
     @Query("SELECT * FROM favorite_tv_Show_data")
     fun getFavoriteTvShow(): DataSource.Factory<Int, FavoriteTvShowData>
 
-    @Query("SELECT * FROM favorite_tv_Show_data")
-    fun getFavoriteTvShowById(): DataSource.Factory<Int, FavoriteTvShowData>
+    @Query("SELECT * FROM favorite_tv_Show_data WHERE id= :id")
+    fun getFavoriteTvShowById(id: Int): FavoriteTvShowData?
 
     @Insert(onConflict = REPLACE)
     fun addFavoriteTvShow(favoriteTvShow: FavoriteTvShowData)
 
-    @Delete
-    fun removeFavoriteTvShow(favorite: FavoriteTvShowData)
+    @Query("DELETE FROM favorite_tv_Show_data WHERE id= :id")
+    fun removeFavoriteTvShow(id: Int)
 }

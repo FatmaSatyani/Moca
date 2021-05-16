@@ -3,6 +3,7 @@ package com.fatmasatyani.moca.detail
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -51,5 +52,6 @@ class DetailTvShowActivityTest {
         onView(withId(R.id.tvShow_RatingBar)).check(matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.detail_tvShow_poster)).check(matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.backdrop_tvShow)).check(matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.btn_tv_favorite)).perform(click())
     }
 }

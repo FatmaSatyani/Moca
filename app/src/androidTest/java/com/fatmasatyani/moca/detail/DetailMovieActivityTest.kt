@@ -3,9 +3,9 @@ package com.fatmasatyani.moca.detail
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.fatmasatyani.moca.R
@@ -52,5 +52,6 @@ class DetailMovieActivityTest {
         onView(withId(R.id.movie_RatingBar)).check(matches(isDisplayed()))
         onView(withId(R.id.detail_movie_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.backdropMovie)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_mv_favorite)).perform(click())
     }
 }

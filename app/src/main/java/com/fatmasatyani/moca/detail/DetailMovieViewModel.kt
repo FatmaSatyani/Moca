@@ -1,7 +1,6 @@
 package com.fatmasatyani.moca.detail
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.fatmasatyani.moca.data.FavoriteMovieData

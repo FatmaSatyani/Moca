@@ -6,21 +6,26 @@ import androidx.lifecycle.Observer
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.utils.FakeData
+import com.fatmasatyani.moca.vo.Resource
+import com.nhaarman.mockitokotlin2.mock
+import junit.framework.TestCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 
 class DetailTvShowViewModelTest {
+
     @Rule
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var viewModel: DetailTvShowViewModel
-    private var repository = Mockito.mock(MovieCatalogueRepository::class.java)
-    private var dataDummyTvShow = FakeData.generateDummyTvShow()
-    private var tvShowId = dataDummyTvShow[1]
+    private var repository = mock(MovieCatalogueRepository::class.java)
+    private val tvShow: TvShow = mock()
 
     @Before
     fun setUp() {
@@ -29,24 +34,28 @@ class DetailTvShowViewModelTest {
     }
 
     @Test
-    fun getTvShow() {
-        val tvShow: MutableLiveData<TvShow> = MutableLiveData()
-        tvShow.postValue(tvShowId)
-        Mockito.`when`(repository.getTvShow(1)).thenReturn(tvShow)
+    fun getMovie() {
 
-        val observer = Mockito.mock(Observer::class.java) as Observer<TvShow>
+        val dummyTvShow = Resource.success(tvShow)
+        Mockito.`when`(dummyTvShow.data?.name).thenReturn(FakeData.getSingleDummyTvShow().name)
+
+        val dummyLiveData = MutableLiveData<Resource<TvShow>>()
+        dummyLiveData.value = dummyTvShow
+        Mockito.`when`(repository.getTvShow(1)).thenReturn(dummyLiveData)
+
+        val observer = mock(Observer::class.java) as Observer<Resource<TvShow>>
         viewModel.setSelectedTvShow().observeForever(observer)
-        Mockito.verify(observer).onChanged(tvShowId)
+        verify(observer).onChanged(dummyTvShow)
 
-        assertNotNull(viewModel.setSelectedTvShow().value)
-        val tvShowResult = viewModel.setSelectedTvShow().value
+        TestCase.assertNotNull(viewModel.setSelectedTvShow().value)
+        val tvShowResult = viewModel.setSelectedTvShow().value?.data
         assertNotNull(tvShowResult)
-        assertEquals(tvShowId.id, tvShowResult?.id)
-        assertEquals(tvShowId.name,tvShowResult?.name)
-        assertEquals(tvShowId.backdropPath, tvShowResult?.backdropPath)
-        assertEquals(tvShowId.overview, tvShowResult?.overview)
-        assertEquals(tvShowId.firstAirDate, tvShowResult?.firstAirDate)
-        assertEquals(tvShowId.posterPath,tvShowResult?.posterPath)
-        assertEquals(tvShowId.voteAverage, tvShowResult?.voteAverage)
+        assertEquals(dummyTvShow.data?.id, tvShowResult?.id)
+        assertEquals(dummyTvShow.data?.backdropPath, tvShowResult?.backdropPath)
+        assertEquals(dummyTvShow.data?.overview, tvShowResult?.overview)
+        assertEquals(dummyTvShow.data?.voteAverage, tvShowResult?.voteAverage)
+        assertEquals(dummyTvShow.data?.firstAirDate, tvShowResult?.firstAirDate)
+        assertEquals(dummyTvShow.data?.name, tvShowResult?.name)
+        assertEquals(dummyTvShow.data?.posterPath, tvShowResult?.posterPath)
     }
 }

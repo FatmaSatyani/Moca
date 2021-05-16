@@ -41,9 +41,9 @@ class LocalDataSource(context: Context) {
         return movie.id?.let { movieDao.getMovieById(it) } != null}
 
     fun isFavoriteMovieById (movie: Movie): Boolean {
-        return movie.id?.let { movieDao.getMovieById(it) } != null}
+        return movieDao.getFavoriteMovieById(movie.id ?: 0) != null}
 
-    fun removeFavoriteMovie (favMovieId: FavoriteMovieData) = movieDao.removeFavoriteMovie(favMovieId)
+    fun removeFavoriteMovie (favMovieId: FavoriteMovieData) = movieDao.removeFavoriteMovie(favMovieId.movieId)
 
 
     fun getAllTvShows () : DataSource.Factory<Int, TvShow> = tvShowDao.getList()
@@ -60,7 +60,7 @@ class LocalDataSource(context: Context) {
         return tvShow.id?.let { tvShowDao.getTvShowById(it) } != null}
 
     fun isFavoriteTvShowById (tvShow: TvShow): Boolean {
-        return tvShow.id?.let { tvShowDao.getTvShowById(it) } != null}
+        return tvShowDao.getFavoriteTvShowById(tvShow.id ?: 0) != null}
 
-    fun removeFavoriteTvShow (favTvShowId: FavoriteTvShowData) = tvShowDao.removeFavoriteTvShow(favTvShowId)
+    fun removeFavoriteTvShow (favTvShowId: FavoriteTvShowData) = tvShowDao.removeFavoriteTvShow(favTvShowId.tvShowId)
 }

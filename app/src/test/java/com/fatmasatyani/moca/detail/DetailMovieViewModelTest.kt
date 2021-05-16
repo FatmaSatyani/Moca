@@ -7,8 +7,9 @@ import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
 import com.fatmasatyani.moca.utils.FakeData
 import com.fatmasatyani.moca.vo.Resource
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import com.nhaarman.mockitokotlin2.mock
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,8 +25,7 @@ class DetailMovieViewModelTest {
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var viewModel: DetailMovieViewModel
     private var repository = mock(MovieCatalogueRepository::class.java)
-    private var dataDummyMovie = FakeData.generateDummyMovie()
-    private var movieId = dataDummyMovie[1]
+    private val movie: Movie = mock()
 
     @Before
     fun setUp() {
@@ -35,35 +35,34 @@ class DetailMovieViewModelTest {
 
     @Test
     fun getMovie() {
-//        val dummyMovie = Resource.success(FakeData.generateDummyMovie())
-//        val movie = MutableLiveData<Resource<Movie>>()
-//        movie.value = dummyMovie
 
-//        val resourceMovie: Resource<Movie> = Resource.success(dataDummyMovie)
-//        val movie: MutableLiveData<Resource<Movie>> = MutableLiveData<Resource<Movie>>()
-//        movie.setValue(resourceMovie)
+        val dummyMovie = Resource.success(movie)
+        `when`(dummyMovie.data?.title).thenReturn(FakeData.getSingleDummyMovie().title)
 
-        val movie: MutableLiveData<Movie> = MutableLiveData()
-        movie.postValue (movieId)
-        `when`(repository.getMovie(1)).thenReturn(movie)
+        val dummyLiveData = MutableLiveData<Resource<Movie>>()
+        dummyLiveData.value = dummyMovie
+        `when`(repository.getMovie(1)).thenReturn(dummyLiveData)
 
         val observer = mock(Observer::class.java) as Observer<Resource<Movie>>
         viewModel.setSelectedMovie().observeForever(observer)
-        verify(observer).onChanged(movieId)
+        verify(observer).onChanged(dummyMovie)
 
         assertNotNull(viewModel.setSelectedMovie().value)
-        val movieResult = viewModel.setSelectedMovie().value
+        val movieResult = viewModel.setSelectedMovie().value?.data
         assertNotNull(movieResult)
-        assertEquals(movieId.id, movieResult?.id)
-        assertEquals(movieId.title, movieResult?.title)
-        assertEquals(movieId.backdropPath, movieResult?.backdropPath)
-        assertEquals(movieId.overview, movieResult?.overview)
-        assertEquals(movieId.posterPath, movieResult?.posterPath)
-        assertEquals(movieId.releaseDate, movieResult?.releaseDate)
-        assertEquals(movieId.runtime, movieResult?.runtime)
-        assertEquals(movieId.voteAverage, movieResult?.voteAverage)
+        assertEquals(dummyMovie.data?.id, movieResult?.id)
+        assertEquals(dummyMovie.data?.backdropPath, movieResult?.backdropPath)
+        assertEquals(dummyMovie.data?.overview, movieResult?.overview)
+        assertEquals(dummyMovie.data?.releaseDate, movieResult?.releaseDate)
+        assertEquals(dummyMovie.data?.voteAverage, movieResult?.voteAverage)
+        assertEquals(dummyMovie.data?.runtime,movieResult?.runtime)
+        assertEquals(dummyMovie.data?.title, movieResult?.title)
+        assertEquals(dummyMovie.data?.posterPath, movieResult?.posterPath)
+
     }
 }
+
+
 
 
 

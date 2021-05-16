@@ -76,11 +76,11 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun fabOnClick() {
         if (detailViewModel.isFavorite(mMovie)) {
             detailViewModel.removeFavorite(mMovie)
-            Snackbar.make(detailBinding.scrollView,"{mMovie.title} removed from Favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(detailBinding.scrollView,"${mMovie.title} removed from Favorite", Snackbar.LENGTH_SHORT).show()
             detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
         } else {
             detailViewModel.addFavorite(mMovie)
-            Snackbar.make(detailBinding.scrollView, "{mMovie.title} added to Favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(detailBinding.scrollView, "${mMovie.title} added to Favorite", Snackbar.LENGTH_SHORT).show()
             detailBinding.btnMvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
         }
     }
