@@ -30,24 +30,31 @@ class FavoriteFragmentTest {
 
     @Rule
     @JvmField
-    var activityRule = ActivityTestRule<SingleFragmentActivity>(SingleFragmentActivity::class.java)
-    private var fragment = FavoriteFragment()
+    var activityRule = ActivityTestRule(HomeActivity::class.java)
 
     @Before
     fun setUp() {
-        activityRule.activity.setFragment(fragment)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
     }
 
     @Test
-    fun loadMovie() {
+    fun loadFavoriteMovie() {
+        onView(withText("FAVORITE")).perform(click())
+        onView(withText("FAV MOVIE")).perform(click())
         onView(withId(R.id.rv_favorite_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_favorite_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteMovie.size))
     }
 
-    fun loadTvShow() {
+    @Test
+    fun loadFavoriteTvShow() {
+        onView(withText("FAVORITE")).perform(click())
         onView(withText("FAV TV SHOW")).perform(click())
-        onView(allOf(withId(R.id.rv_favorite_tv_show))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.rv_favorite_tv_show)).perform(click())
         onView(withId(R.id.rv_favorite_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
     }
-
 }
