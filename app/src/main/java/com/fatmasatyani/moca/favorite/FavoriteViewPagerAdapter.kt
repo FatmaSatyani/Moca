@@ -13,7 +13,7 @@ class FavoriteViewPagerAdapter (private val context: Context, fm: FragmentManage
 
     companion object {
         @StyleRes
-        private val TAB_TITLES = intArrayOf(R.string.movie, R.string.tvshow)
+        private val TAB_TITLES = intArrayOf(R.string.fav_movie, R.string.fav_tv_show)
     }
 
     override fun getCount(): Int = TAB_TITLES.size

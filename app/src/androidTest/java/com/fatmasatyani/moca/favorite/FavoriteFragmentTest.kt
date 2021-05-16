@@ -41,13 +41,13 @@ class FavoriteFragmentTest {
     @Test
     fun loadMovie() {
         onView(withId(R.id.rv_favorite_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteMovie.size))
+        onView(withId(R.id.rv_favorite_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteMovie.size))
     }
 
     fun loadTvShow() {
         onView(withText("TV SHOW")).perform(click())
-        onView(allOf(withId(R.id.rv_tvShows))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-        onView(withId(R.id.rv_tvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
+        onView(allOf(withId(R.id.rv_favorite_tv_show))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.rv_favorite_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
     }
 
 }

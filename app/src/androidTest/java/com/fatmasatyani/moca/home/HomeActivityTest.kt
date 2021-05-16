@@ -47,19 +47,20 @@ class HomeActivityTest {
 
     @Test
     fun loadTvShow() {
-//        onView(withText("TV SHOW")).perform(click())
-//        onView(allOf(withId(R.id.rv_tvShows))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
-//        onView(withId(R.id.rv_tvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShow.size))
+        onView(withText("TV SHOW")).perform(click())
+        onView(allOf(withId(R.id.rv_tvShows))).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
+        onView(withId(R.id.rv_tvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShow.size))
     }
 
-//    @Test
-//    fun loadFavorite() {
-//        onView(withText("FAVORITE")).perform(ViewActions.click())
-//        onView(withId(R.id.favorite_viewpager)).perform(ViewActions.click())
-//        onView(withId(R.id.rv_favorite_movie)).check(matches(isDisplayed()))
-        //        onView(withId(R.id.rv_favorite_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteMovie.size))
-//        onView(withText("TV SHOW")).perform(ViewActions.click())
-//        onView(withId(R.id.rv_favorite_tv_show)).perform(ViewActions.click())
-//        onView(withId(R.id.rv_favorite_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
-//    }
+    @Test
+    fun loadFavorite() {
+        onView(withText("FAVORITE")).perform(click())
+        onView(withId(R.id.favorite_viewpager)).perform(click())
+        onView(withText("FAV MOVIE")).perform(click())
+        onView(withId(R.id.rv_favorite_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_favorite_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteMovie.size))
+        onView(withText("FAV TV SHOW")).perform(click())
+        onView(withId(R.id.rv_favorite_tv_show)).perform(click())
+        onView(withId(R.id.rv_favorite_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyFavoriteTvShow.size))
+    }
 }

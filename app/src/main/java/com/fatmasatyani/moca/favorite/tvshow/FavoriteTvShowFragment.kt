@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fatmasatyani.moca.databinding.FragmentFavoriteTvShowBinding
 import com.fatmasatyani.moca.databinding.FragmentTvShowBinding
 import com.fatmasatyani.moca.detail.DetailTvShowActivity
 import com.fatmasatyani.moca.favorite.movie.FavoriteMovieViewModel
@@ -17,7 +18,7 @@ import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 class FavoriteTvShowFragment : Fragment() , FavoriteTvShowAdapter.OnItemClickCallback {
 
-    private var _favoriteTvShowFragmentBinding: FragmentTvShowBinding? = null
+    private var _favoriteTvShowFragmentBinding: FragmentFavoriteTvShowBinding? = null
     private val binding get() = _favoriteTvShowFragmentBinding
 
     private lateinit var viewModel: FavoriteTvShowViewModel
@@ -27,7 +28,7 @@ class FavoriteTvShowFragment : Fragment() , FavoriteTvShowAdapter.OnItemClickCal
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _favoriteTvShowFragmentBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        _favoriteTvShowFragmentBinding = FragmentFavoriteTvShowBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
@@ -48,9 +49,9 @@ class FavoriteTvShowFragment : Fragment() , FavoriteTvShowAdapter.OnItemClickCal
                     adapter.submitList(it)}
             })
 
-            binding?.rvTvShows?.adapter = adapter
-            binding?.rvTvShows?.layoutManager = LinearLayoutManager(requireContext())
-            binding?.rvTvShows?.setHasFixedSize(true)
+            binding?.rvFavoriteTvShow?.adapter = adapter
+            binding?.rvFavoriteTvShow?.layoutManager = LinearLayoutManager(requireContext())
+            binding?.rvFavoriteTvShow?.setHasFixedSize(true)
         }
     }
 
