@@ -1,10 +1,10 @@
 package com.fatmasatyani.moca.splashscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.fatmasatyani.moca.R
 import com.fatmasatyani.moca.home.HomeActivity
 

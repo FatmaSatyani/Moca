@@ -208,7 +208,6 @@ class MovieCatalogueRepository private constructor(
         }.asLiveData()
     }
 
-
     override fun getAllFavoriteTvShow(): LiveData<PagedList<FavoriteTvShowData>> {
         val result = MediatorLiveData<PagedList<FavoriteTvShowData>>()
         appExecutors.mainThread().execute {
@@ -237,7 +236,7 @@ class MovieCatalogueRepository private constructor(
                 tvShow.posterPath
             )
         localRepository.addFavoriteTvShows(favoriteTvShowData)
-        }
+    }
 
     override fun removeFavoriteTvShow(tvShow: TvShow) {
         val favoriteTvShowData = FavoriteTvShowData (

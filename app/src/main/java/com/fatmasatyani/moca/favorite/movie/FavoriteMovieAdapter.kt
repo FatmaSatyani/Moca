@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.fatmasatyani.moca.data.FavoriteMovieData
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant
 
-class FavoriteMovieAdapter (private val listener: (FavoriteMovieData) -> Unit) : PagedListAdapter<FavoriteMovieData, FavoriteMovieAdapter.MovieViewHolder> (DIFF_CALLBACK){
+class FavoriteMovieAdapter (private val listener: (FavoriteMovieData) -> Unit) : PagedListAdapter<FavoriteMovieData, FavoriteMovieAdapter.MovieViewHolder>(DIFF_CALLBACK){
+
+    private val roundingCorners = 20
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteMovieData>() {
@@ -54,7 +55,7 @@ class FavoriteMovieAdapter (private val listener: (FavoriteMovieData) -> Unit) :
 
                 Glide.with(itemView.context)
                     .load("${Constant.IMG_URL}${movie.posterPath}")
-                    .transform(RoundedCorners(20))
+                    .transform(RoundedCorners(roundingCorners))
                     .into(binding.favImage)
             }
         }
@@ -63,6 +64,7 @@ class FavoriteMovieAdapter (private val listener: (FavoriteMovieData) -> Unit) :
     interface OnItemClickCallback {
         fun onItemClicked(id: String)
     }
+
 }
 
 

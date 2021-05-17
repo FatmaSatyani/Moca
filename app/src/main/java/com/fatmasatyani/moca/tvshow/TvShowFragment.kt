@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.FragmentTvShowBinding
 import com.fatmasatyani.moca.detail.DetailTvShowActivity
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory

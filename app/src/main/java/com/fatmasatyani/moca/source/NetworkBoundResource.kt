@@ -2,7 +2,6 @@ package com.fatmasatyani.moca.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.fatmasatyani.moca.data.MovieDetailResponse
 import com.fatmasatyani.moca.source.remote.response.ApiResponse
 import com.fatmasatyani.moca.utils.AppExecutors
 import com.fatmasatyani.moca.vo.Resource

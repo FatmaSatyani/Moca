@@ -24,7 +24,6 @@ interface MovieCatalogueDataSource {
 
     fun isFavoriteMovieById (movie: Movie) : Boolean
 
-
     fun getListTvShows (page: Int) : LiveData<Resource<PagedList<TvShow>>>
 
     fun getTvShow(id: Int) : LiveData<Resource<TvShow>>

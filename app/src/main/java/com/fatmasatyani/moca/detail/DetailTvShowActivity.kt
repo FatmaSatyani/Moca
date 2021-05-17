@@ -1,7 +1,6 @@
 package com.fatmasatyani.moca.detail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -16,6 +15,8 @@ import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class DetailTvShowActivity : AppCompatActivity() {
+
+    private val roundingCorners = 20
 
     companion object {
         const val EXTRA_TVSHOW = "extra_tvshow"
@@ -42,7 +43,6 @@ class DetailTvShowActivity : AppCompatActivity() {
 
             val tvShow = it.data
 
-
             if (tvShow != null) {
                 mTvShow = tvShow
                 detailBinding.tvTvShowTitle.text = tvShow.name
@@ -51,11 +51,11 @@ class DetailTvShowActivity : AppCompatActivity() {
                 detailBinding.tvShowRatingBar.rating = (tvShow.voteAverage / 2)
                 Glide.with(this)
                     .load("$IMG_URL${tvShow.backdropPath}")
-                    .transform(RoundedCorners(20))
+                    .transform(RoundedCorners(roundingCorners))
                     .into(detailBinding.backdropTvShow)
                 Glide.with(this)
                     .load("$IMG_URL${tvShow.posterPath}")
-                    .transform(RoundedCorners(20))
+                    .transform(RoundedCorners(roundingCorners))
                     .into(detailBinding.detailTvShowPoster)
                 detailBinding.progressBar.hide()
 
@@ -67,9 +67,9 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     private fun favoriteState() {
         if (detailViewModel.isFavorite(mTvShow)) {
-            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+            detailBinding.btnTvFavorite.setBackgroundColor(R.drawable.ic_baseline_favorite_24)
         } else {
-            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+            detailBinding.btnTvFavorite.setBackgroundColor(R.drawable.ic_baseline_favorite_border_24)
         }
     }
 
@@ -77,11 +77,11 @@ class DetailTvShowActivity : AppCompatActivity() {
         if (detailViewModel.isFavorite(mTvShow)) {
             detailViewModel.removeFavorite(mTvShow)
             Snackbar.make(detailBinding.scrollView,"${mTvShow.name} removed from Favorite", Snackbar.LENGTH_SHORT).show()
-            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+            detailBinding.btnTvFavorite.setBackgroundColor(R.drawable.ic_baseline_favorite_border_24)
         } else {
             detailViewModel.addFavorite(mTvShow)
             Snackbar.make(detailBinding.scrollView, "${mTvShow.name} added to Favorite", Snackbar.LENGTH_SHORT).show()
-            detailBinding.btnTvFavorite.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+            detailBinding.btnTvFavorite.setBackgroundColor(R.drawable.ic_baseline_favorite_24)
         }
     }
 

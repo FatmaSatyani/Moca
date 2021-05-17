@@ -24,15 +24,6 @@ class MovieAdapter(private val listener: (Movie) -> Unit) : PagedListAdapter<Mov
         }
     }
 
-    private var listMovies : MutableList<Movie> = mutableListOf()
-
-    fun setMovies(movies: List<Movie>) {
-        if (movies.isNullOrEmpty()) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val rowItemsBinding = RowItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(rowItemsBinding)
@@ -56,6 +47,5 @@ class MovieAdapter(private val listener: (Movie) -> Unit) : PagedListAdapter<Mov
                         .into(itemPoster)
             }
         }
-
     }
 }

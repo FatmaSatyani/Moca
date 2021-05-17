@@ -23,8 +23,7 @@ class ViewModelFactory private constructor(private val listRepository: MovieCata
                 instance?:ViewModelFactory(Injection.provideRepository(application)).apply {
                     instance = this
                 }
-        }
-
+            }
     }
 
     @Suppress("UNCHECKED_CAST")

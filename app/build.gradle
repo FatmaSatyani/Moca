@@ -115,7 +115,7 @@ dependencies {
         implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
         implementation "android.arch.lifecycle:extensions:2.3.1"
 
-        //gson
+        //GSON
         implementation 'com.google.code.gson:gson:2.8.6'
 
         // ROOM
@@ -128,6 +128,6 @@ dependencies {
         implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
         //Paging
-        implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
+        implementation 'androidx.paging:paging-runtime-ktx:3.0.0'
     }
 }

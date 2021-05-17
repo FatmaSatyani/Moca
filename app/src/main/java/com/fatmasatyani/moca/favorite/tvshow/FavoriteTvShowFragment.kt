@@ -2,17 +2,15 @@ package com.fatmasatyani.moca.favorite.tvshow
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fatmasatyani.moca.databinding.FragmentFavoriteTvShowBinding
-import com.fatmasatyani.moca.databinding.FragmentTvShowBinding
 import com.fatmasatyani.moca.detail.DetailTvShowActivity
-import com.fatmasatyani.moca.favorite.movie.FavoriteMovieViewModel
 import com.fatmasatyani.moca.viewmodel.ViewModelFactory
 
 

@@ -45,7 +45,6 @@ class LocalDataSource(context: Context) {
 
     fun removeFavoriteMovie (favMovieId: FavoriteMovieData) = movieDao.removeFavoriteMovie(favMovieId.movieId)
 
-
     fun getAllTvShows () : DataSource.Factory<Int, TvShow> = tvShowDao.getList()
 
     fun getTvShowById (id: Int): LiveData<TvShow> = tvShowDao.getTvShowById(id)

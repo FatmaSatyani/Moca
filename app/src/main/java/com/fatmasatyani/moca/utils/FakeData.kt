@@ -4,10 +4,7 @@ import com.fatmasatyani.moca.data.FavoriteMovieData
 import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
-import java.util.*
-import kotlin.collections.ArrayList
 
 object FakeData {
 

@@ -3,7 +3,6 @@ package com.fatmasatyani.moca.tvshow
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -14,7 +13,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.fatmasatyani.moca.R
-import com.fatmasatyani.moca.SingleFragmentActivity
 import com.fatmasatyani.moca.home.HomeActivity
 import com.fatmasatyani.moca.utils.EspressoIdlingResource
 import com.fatmasatyani.moca.utils.FakeData

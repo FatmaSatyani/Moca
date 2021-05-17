@@ -7,16 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.fatmasatyani.moca.databinding.FragmentFavoriteBinding
 
-
 class FavoriteFragment : Fragment() {
 
     private lateinit var favoriteAdapter: FavoriteViewPagerAdapter
     private lateinit var binding: FragmentFavoriteBinding
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = FavoriteFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

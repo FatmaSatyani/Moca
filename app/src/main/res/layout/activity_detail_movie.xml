@@ -54,6 +54,7 @@
                 android:backgroundTint="@color/Secondary_Light"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_baseline_favorite_border_24"
+                android:contentDescription="@string/button_favorite"
                 app:borderWidth="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.754"

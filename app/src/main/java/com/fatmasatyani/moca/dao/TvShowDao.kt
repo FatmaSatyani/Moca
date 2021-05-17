@@ -2,9 +2,10 @@ package com.fatmasatyani.moca.dao
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import com.fatmasatyani.moca.data.FavoriteMovieData
+import androidx.room.Query
 import com.fatmasatyani.moca.data.FavoriteTvShowData
 import com.fatmasatyani.moca.data.TvShow
 
@@ -19,9 +20,6 @@ interface TvShowDao {
 
     @Insert(onConflict = REPLACE)
     fun insert(tvShow: List<TvShow>)
-
-    @Update
-    fun update (tvShow: TvShow): Int
 
     @Query("SELECT * FROM favorite_tv_Show_data")
     fun getFavoriteTvShow(): DataSource.Factory<Int, FavoriteTvShowData>

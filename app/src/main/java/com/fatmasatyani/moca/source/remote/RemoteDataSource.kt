@@ -45,7 +45,6 @@ class RemoteDataSource {
 
     fun getMovieById(id: Int): LiveData<ApiResponse<MovieDetailResponse>> {
         val movieById = MutableLiveData<ApiResponse<MovieDetailResponse>>()
-//        val movieById: MutableLiveData<MovieDetailResponse> = MutableLiveData()
         EspressoIdlingResource.increment()
 
         apiConfig.movie(id, API_KEY).enqueue(

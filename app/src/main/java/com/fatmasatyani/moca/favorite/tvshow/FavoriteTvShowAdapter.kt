@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.fatmasatyani.moca.data.FavoriteMovieData
 import com.fatmasatyani.moca.data.FavoriteTvShowData
-import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.FavoriteItemLayoutBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
 
 class FavoriteTvShowAdapter (private val listener: (FavoriteTvShowData) -> Unit) : PagedListAdapter<FavoriteTvShowData, FavoriteTvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK){
+
+    private val roundingCorners = 20
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteTvShowData>() {
@@ -55,7 +55,7 @@ class FavoriteTvShowAdapter (private val listener: (FavoriteTvShowData) -> Unit)
 
                 Glide.with(itemView.context)
                     .load("$IMG_URL${tvShow.posterPath}")
-                    .transform(RoundedCorners(20))
+                    .transform(RoundedCorners(roundingCorners))
                     .into(binding.favImage)
             }
         }

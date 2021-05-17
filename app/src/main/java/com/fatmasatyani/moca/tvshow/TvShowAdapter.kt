@@ -6,7 +6,6 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.fatmasatyani.moca.data.Movie
 import com.fatmasatyani.moca.data.TvShow
 import com.fatmasatyani.moca.databinding.RowItemsBinding
 import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
@@ -23,15 +22,6 @@ class TvShowAdapter(private val listener: (TvShow) -> Unit) : PagedListAdapter<T
                 return oldItem == newItem
             }
         }
-    }
-
-    private var listTvShows : MutableList<TvShow> = mutableListOf()
-
-    fun setTvShows(tvShows: List<TvShow>) {
-        if (tvShows.isNullOrEmpty()) return
-        this.listTvShows.clear()
-        this.listTvShows.addAll(tvShows)
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
@@ -57,6 +47,5 @@ class TvShowAdapter(private val listener: (TvShow) -> Unit) : PagedListAdapter<T
                     .into(itemPoster)
             }
         }
-
     }
 }
