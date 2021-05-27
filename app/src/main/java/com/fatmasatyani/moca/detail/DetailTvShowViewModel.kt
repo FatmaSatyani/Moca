@@ -1,28 +1,28 @@
 package com.fatmasatyani.moca.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.vo.Resource
+import com.fatmasatyani.core.data.entity.TvShow
+import com.fatmasatyani.core.domain.model.FavoriteTvShowModel
+import com.fatmasatyani.core.domain.model.TvShowModel
+import com.fatmasatyani.core.domain.usecase.MocaUseCase
+import com.fatmasatyani.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-class DetailTvShowViewModel(private val listRepository: MovieCatalogueRepository) : ViewModel() {
+class DetailTvShowViewModel(private val mocaUseCase: MocaUseCase) : ViewModel() {
 
-    var tvShowId: Int = 0
-
-    fun addFavorite (tvShow: TvShow) {
-        listRepository.addFavoriteTvShow(tvShow)
+    fun addFavorite (tvShow: FavoriteTvShowModel) {
+        mocaUseCase.addFavoriteTvShow(tvShow)
     }
 
-    fun removeFavorite(tvShow: TvShow) {
-        listRepository.removeFavoriteTvShow(tvShow)
+    fun removeFavorite(tvShow: FavoriteTvShowModel) {
+        mocaUseCase.removeFavoriteTvShow(tvShow)
     }
 
-    fun isFavorite(tvShow: TvShow): Boolean {
-        return listRepository.isFavoriteTvShowById(tvShow)
+    fun isFavorite(tvShow: TvShowModel): Boolean {
+        return mocaUseCase.isFavoriteTvShow(tvShow)
     }
 
-    fun setSelectedTvShow(): LiveData<Resource<TvShow>> {
-        return listRepository.getTvShow(tvShowId)
+    fun setSelectedTvShow(): Flow<Resource<List<TvShowModel>>> {
+        return mocaUseCase.getListTvShow()
     }
 }

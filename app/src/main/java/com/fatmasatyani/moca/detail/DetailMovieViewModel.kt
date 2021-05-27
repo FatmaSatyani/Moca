@@ -1,28 +1,27 @@
 package com.fatmasatyani.moca.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.vo.Resource
+import com.fatmasatyani.core.domain.model.FavoriteMovieModel
+import com.fatmasatyani.core.domain.model.MovieModel
+import com.fatmasatyani.core.domain.usecase.MocaUseCase
+import com.fatmasatyani.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-class DetailMovieViewModel(private val listRepository: MovieCatalogueRepository) : ViewModel() {
+class DetailMovieViewModel(private val mocaUseCase: MocaUseCase) : ViewModel() {
 
-    var movieId: Int = 0
-
-    fun addFavorite (movie: Movie) {
-        listRepository.addFavoriteMovie(movie)
+    fun addFavorite (movie: FavoriteMovieModel) {
+        mocaUseCase.addFavoriteMovie(movie)
     }
 
-    fun removeFavorite(movie: Movie) {
-        listRepository.removeFavoriteMovie(movie)
+    fun removeFavorite(movie: FavoriteMovieModel) {
+        mocaUseCase.removeFavoriteMovie(movie)
     }
 
-    fun isFavorite(movie: Movie): Boolean {
-        return listRepository.isFavoriteMovieById(movie)
+    fun isFavorite(movie: MovieModel): Boolean {
+        return mocaUseCase.isFavoriteMovie(movie)
     }
 
-    fun setSelectedMovie(): LiveData<Resource<Movie>> {
-        return listRepository.getMovie(movieId)
+    fun setSelectedMovie(): Flow<Resource<List<MovieModel>>> {
+        return mocaUseCase.getListMovie()
     }
 }

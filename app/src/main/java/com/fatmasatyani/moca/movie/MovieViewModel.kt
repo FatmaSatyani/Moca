@@ -2,16 +2,16 @@ package com.fatmasatyani.moca.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
-import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.vo.Resource
+import androidx.lifecycle.asLiveData
+import com.fatmasatyani.core.domain.model.MovieModel
+import com.fatmasatyani.core.domain.usecase.MocaUseCase
+import com.fatmasatyani.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-class MovieViewModel(private val listRepository: MovieCatalogueRepository) : ViewModel() {
+class MovieViewModel(private val mocaUseCase: MocaUseCase) : ViewModel() {
 
     var page = 1
 
-    fun getMovie(): LiveData<Resource<PagedList<Movie>>> {
-        return listRepository.getListMovies(page)
-    }
+    fun getMovie(): LiveData<Resource<List<MovieModel>>> =
+        mocaUseCase.getListMovie().asLiveData()
 }

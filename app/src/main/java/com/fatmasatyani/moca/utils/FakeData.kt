@@ -1,10 +1,10 @@
 package com.fatmasatyani.moca.utils
 
-import com.fatmasatyani.moca.data.FavoriteMovieData
-import com.fatmasatyani.moca.data.FavoriteTvShowData
-import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.data.TvShow
-import com.fatmasatyani.moca.utils.Constant.Companion.IMG_URL
+import com.fatmasatyani.core.data.entity.FavoriteMovieData
+import com.fatmasatyani.core.data.entity.FavoriteTvShowData
+import com.fatmasatyani.core.data.entity.Movie
+import com.fatmasatyani.core.data.entity.TvShow
+import com.fatmasatyani.core.constant.Constant.Companion.IMG_URL
 
 object FakeData {
 
@@ -94,7 +94,7 @@ object FakeData {
         return tvShow
     }
 
-    fun getSingleDummyTvShow(): TvShow{
+    fun getSingleDummyTvShow(): TvShow {
         return TvShow(
             1,
             "$IMG_URL/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg",

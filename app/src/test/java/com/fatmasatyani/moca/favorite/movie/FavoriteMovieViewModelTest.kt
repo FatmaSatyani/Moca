@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.fatmasatyani.moca.data.FavoriteMovieData
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.vo.Resource
+import com.fatmasatyani.core.data.entity.FavoriteMovieData
+import com.fatmasatyani.core.data.source.MovieCatalogueRepository
+import com.fatmasatyani.core.utils.Resource
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Before
 import org.junit.Rule
@@ -23,13 +23,13 @@ class FavoriteMovieViewModelTest {
     @Rule
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
-    private lateinit var viewModel: FavoriteMovieViewModel
+    private lateinit var viewModel: com.fatmasatyani.favorite.movie.FavoriteMovieViewModel
     private var repository = mock(MovieCatalogueRepository::class.java)
     private val favoriteMovie: PagedList<FavoriteMovieData> = mock()
 
     @Before
     fun setUp() {
-        viewModel = FavoriteMovieViewModel(repository)
+        viewModel = com.fatmasatyani.favorite.movie.FavoriteMovieViewModel(repository)
     }
 
     @Test

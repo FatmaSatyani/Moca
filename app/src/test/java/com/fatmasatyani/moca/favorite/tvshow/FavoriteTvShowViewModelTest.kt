@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.fatmasatyani.moca.data.FavoriteTvShowData
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.vo.Resource
+import com.fatmasatyani.core.data.entity.FavoriteTvShowData
+import com.fatmasatyani.core.data.source.MovieCatalogueRepository
+import com.fatmasatyani.core.utils.Resource
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Before
 import org.junit.Rule
@@ -22,13 +22,13 @@ class FavoriteTvShowViewModelTest {
     @Rule
     @JvmField
     val instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
-    private lateinit var viewModel: FavoriteTvShowViewModel
+    private lateinit var viewModel: com.fatmasatyani.favorite.tvshow.FavoriteTvShowViewModel
     private var repository = Mockito.mock(MovieCatalogueRepository::class.java)
     private val favoriteTvShow: PagedList<FavoriteTvShowData> = mock()
 
     @Before
     fun setUp() {
-        viewModel = FavoriteTvShowViewModel(repository)
+        viewModel = com.fatmasatyani.favorite.tvshow.FavoriteTvShowViewModel(repository)
     }
 
     @Test

@@ -17,5 +17,7 @@
     <string name="fav_movie">Fav Movie</string>
     <string name="fav_tv_show">Fav Tv Show</string>
     <string name="button_favorite">Favorite Button</string>
+    <string name="title_favorite">favorite</string>
+    <string name="blank">No data is available</string>
 
 </resources>

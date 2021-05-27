@@ -4,10 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.fatmasatyani.moca.data.Movie
-import com.fatmasatyani.moca.source.remote.MovieCatalogueRepository
-import com.fatmasatyani.moca.utils.PagedListUtils
-import com.fatmasatyani.moca.vo.Resource
+import com.fatmasatyani.core.data.entity.Movie
+import com.fatmasatyani.core.data.source.MovieCatalogueRepository
+import com.fatmasatyani.core.utils.Resource
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
