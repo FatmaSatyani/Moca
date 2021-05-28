@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FavoriteMovieModel (
-    val favId: Int,
+    val Id: Int,
     val MovId: Int,
     val backdrop: String,
     val overview: String,

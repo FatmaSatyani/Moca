@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/splashScreenFragment">
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.fatmasatyani.moca.splashscreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen">
+
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.fatmasatyani.moca.movie.HomeFragment"
+        android:label="fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteMovieFragment"
+            app:destination="@id/favoriteMovieFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/favoriteMovieFragment"
+        android:name="com.fatmasatyani.favorite.movie.FavoriteMovieFragment"
+        app:moduleName="Moca.favorite"
+        android:label="FavoriteMovieFragment" >
+        <action
+            android:id="@+id/action_favoriteMovieFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.fatmasatyani.moca.detail.DetailActivity"
+        android:label="DetailActivity">
+        <argument
+            android:name="movie"
+            app:argType="com.fatmasatyani.core.domain.model.MovieModel"/>
+    </activity>
+
+</navigation>

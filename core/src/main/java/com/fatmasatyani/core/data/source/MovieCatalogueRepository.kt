@@ -3,11 +3,8 @@ package com.fatmasatyani.core.data.source
 import com.fatmasatyani.core.data.source.local.LocalDataSource
 import com.fatmasatyani.core.data.source.remote.response.ApiResponse
 import com.fatmasatyani.core.data.source.remote.response.MovieDetailResponse
-import com.fatmasatyani.core.data.source.remote.response.TvShowDetailResponse
 import com.fatmasatyani.core.domain.model.FavoriteMovieModel
-import com.fatmasatyani.core.domain.model.FavoriteTvShowModel
 import com.fatmasatyani.core.domain.model.MovieModel
-import com.fatmasatyani.core.domain.model.TvShowModel
 import com.fatmasatyani.core.domain.repository.IMocaRepository
 import com.fatmasatyani.core.utils.DataMapper
 import com.fatmasatyani.core.utils.Resource
@@ -35,6 +32,7 @@ class MovieCatalogueRepository (
 
             override fun saveCallResult(data: List<MovieDetailResponse>) {
                 val movie = DataMapper.mapMovieDetailResponsesToMovie(data)
+                localDataSource.insertMovies(movie)
             }
 
         }.asFlow()
@@ -44,65 +42,65 @@ class MovieCatalogueRepository (
             DataMapper.mapFavMovEntitiesToFavMovDomain(it)
         }
 
-    override fun addFavoriteMovie(movie: FavoriteMovieModel) {
+    override fun addFavoriteMovie(movie: MovieModel) {
         CoroutineScope(Dispatchers.IO).launch {
             val favMovie = DataMapper.mapDomainToFavMovEntities(movie)
             localDataSource.addFavoriteMovie(favMovie)
         }
     }
 
-    override fun removeFavoriteMovie(movie: FavoriteMovieModel) {
+    override fun removeFavoriteMovie(movie: MovieModel) {
         CoroutineScope(Dispatchers.IO).launch {
-            localDataSource.removeFavoriteMovie(movie.MovId)
+            localDataSource.removeFavoriteMovie(movie.movieId)
         }
     }
 
     override fun isFavoriteMovie(movie: MovieModel): Boolean {
         return localDataSource.isFavoriteMovieById(movie)
     }
-
-    override fun getListTvShow(): Flow<Resource<List<TvShowModel>>> =
-        object : NetworkBoundResource<List<TvShowModel>, List<TvShowDetailResponse>>() {
-            override fun loadFromDB(): Flow<List<TvShowModel>> =
-                localDataSource.getAllTvShows().map {
-                    DataMapper.mapTvShowEntitiesToDomain(it)
-                }
-
-            override fun shouldFetch(data: List<TvShowModel>?): Boolean = true
-
-            override fun createCall(): Flow<ApiResponse<List<TvShowDetailResponse>>> =
-                remoteDataSource.getTvShow()
-
-            override fun saveCallResult(data: List<TvShowDetailResponse>) {
-                val movie = DataMapper.mapTvShowDetailResponsesToTvShow(data)
-            }
-
-        }.asFlow()
-
-
-    override fun getAllFavoriteTvShow(): Flow<List<FavoriteTvShowModel>> =
-        localDataSource.getAllTvShows().map {
-            DataMapper.mapFavTvEntitiesToFavTvDomain(it)
-        }
-
-
-    override fun addFavoriteTvShow(tvShow: FavoriteTvShowModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val favTvShow = DataMapper.mapDomainToFavTvEntities(tvShow)
-            localDataSource.addFavoriteTvShows(favTvShow)
-        }
-    }
-
-    override fun removeFavoriteTvShow(tvShow: FavoriteTvShowModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataSource.removeFavoriteTvShow(tvShow.tvShowId)
-        }
-    }
-
-    override fun isFavoriteTvShow(tvShow: TvShowModel): Boolean {
-        return localDataSource.isFavoriteTvShowById(tvShow)
-    }
 }
+//    override fun getListTvShow(): Flow<Resource<List<TvShowModel>>> =
+//        object : NetworkBoundResource<List<TvShowModel>, List<TvShowDetailResponse>>() {
+//            override fun loadFromDB(): Flow<List<TvShowModel>> =
+//                localDataSource.getAllTvShows().map {
+//                    DataMapper.mapTvShowEntitiesToDomain(it)
+//                }
+//
+//            override fun shouldFetch(data: List<TvShowModel>?): Boolean = true
+//
+//            override fun createCall(): Flow<ApiResponse<List<TvShowDetailResponse>>> =
+//                remoteDataSource.getTvShow()
+//
+//            override fun saveCallResult(data: List<TvShowDetailResponse>) {
+//                val movie = DataMapper.mapTvShowDetailResponsesToTvShow(data)
+//            }
+//
+//        }.asFlow()
+//
+//
+//    override fun getAllFavoriteTvShow(): Flow<List<FavoriteTvShowModel>> =
+//        localDataSource.getAllTvShows().map {
+//            DataMapper.mapFavTvEntitiesToFavTvDomain(it)
+//        }
+//
+//
+//    override fun addFavoriteTvShow(tvShow: FavoriteTvShowModel) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val favTvShow = DataMapper.mapDomainToFavTvEntities(tvShow)
+//            localDataSource.addFavoriteTvShows(favTvShow)
+//        }
+//    }
+//
+//    override fun removeFavoriteTvShow(tvShow: FavoriteTvShowModel) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            localDataSource.removeFavoriteTvShow(tvShow.tvShowId)
+//        }
+//    }
+//
+//    override fun isFavoriteTvShow(tvShow: TvShowModel): Boolean {
+//        return localDataSource.isFavoriteTvShowById(tvShow)
+//    }
+
 
 //    override fun getTvShow(id: Int): Flow<Resource<TvShow>> {
 //        return object : NetworkBoundResource<TvShow, TvShowDetailResponse>() {

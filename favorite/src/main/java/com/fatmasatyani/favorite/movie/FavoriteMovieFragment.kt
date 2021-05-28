@@ -10,9 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fatmasatyani.core.domain.model.FavoriteMovieModel
 import com.fatmasatyani.core.ui.FavoriteMovieAdapter
+import com.fatmasatyani.core.utils.DataMapper
 import com.fatmasatyani.di.favoriteMovieModule
 import com.fatmasatyani.moca.databinding.FragmentFavoriteMovieBinding
-import com.fatmasatyani.moca.detail.DetailMovieActivity
+import com.fatmasatyani.moca.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
@@ -41,8 +42,8 @@ class FavoriteMovieFragment : Fragment() {
         })
 
         adapter.setOnItemClickCallback {
-//            val favMovie = DataMapper.mapFavMovieToMovie(it)
-            val intent = Intent(requireContext(), DetailMovieActivity::class.java)
+            val favMovie = DataMapper.mapFavMovieToMovie(it)
+            val intent = Intent(requireContext(), DetailActivity::class.java)
             intent.putExtra("movieId", it.MovId)
             startActivity(intent)
         }

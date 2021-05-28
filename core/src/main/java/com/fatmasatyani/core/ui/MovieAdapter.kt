@@ -2,18 +2,16 @@ package com.fatmasatyani.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fatmasatyani.core.constant.Constant.Companion.IMG_URL
-import com.fatmasatyani.core.data.entity.Movie
 import com.fatmasatyani.core.databinding.RowItemsBinding
 import com.fatmasatyani.core.domain.model.MovieModel
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val movies = mutableListOf<MovieModel>()
-    private lateinit var onItemClick: (movie: MovieModel) -> Unit
+    private var onItemClick: ((MovieModel) -> Unit)? = null
 
     fun setOnItemClick(onItemClick: (movie: MovieModel) -> Unit) { this.onItemClick = onItemClick}
 
@@ -31,11 +29,18 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         return movies.size
     }
 
+    fun setDataSet(movie: List<MovieModel>?) {
+        if (movie ==null) return
+        this.movies.clear()
+        this.movies.addAll(movie)
+        notifyDataSetChanged()
+    }
+
     inner class MovieViewHolder(private val binding: RowItemsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: MovieModel) {
             with(binding) {
                 itemTitle.text = movie.movieTitle
-                itemView.setOnClickListener{onItemClick.invoke(movie)}
+                itemView.setOnClickListener{onItemClick?.invoke(movie)}
 
                 Glide.with(itemView.context)
                     .load("$IMG_URL${movie.moviePoster}")

@@ -16,7 +16,7 @@ val databaseModule = module {
     val tableName = "db_favorite"
 
     factory { get<AppDatabase>().movieDao() }
-    factory { get<AppDatabase>().tvShowDao() }
+//    factory { get<AppDatabase>().tvShowDao() }
 
     single {
         val passphrase: ByteArray = SQLiteDatabase.getBytes("moca".toCharArray())

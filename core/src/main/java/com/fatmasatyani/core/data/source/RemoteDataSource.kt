@@ -3,7 +3,7 @@ package com.fatmasatyani.core.data.source
 import com.fatmasatyani.core.constant.Constant.Companion.API_KEY
 import com.fatmasatyani.core.data.source.remote.response.ApiResponse
 import com.fatmasatyani.core.data.source.remote.response.MovieDetailResponse
-import com.fatmasatyani.core.data.source.remote.response.TvShowDetailResponse
+//import com.fatmasatyani.core.data.source.remote.response.TvShowDetailResponse
 import com.fatmasatyani.core.network.ApiConfig
 import com.fatmasatyani.core.network.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +41,7 @@ class RemoteDataSource(private val apiService: ApiService) {
     fun getMovie(): Flow<ApiResponse<List<MovieDetailResponse>>> {
         return flow {
             try {
-                val response = apiConfig.popularMovie(apiKey)
+                val response = apiService.popularMovie(apiKey)
                 if (response.result.isNotEmpty()) {
                     emit(ApiResponse.Success(response.result))
                 } else {
@@ -123,20 +123,20 @@ class RemoteDataSource(private val apiService: ApiService) {
 //        return movieById
 //    }
 
-    fun getTvShow(): Flow<ApiResponse<List<TvShowDetailResponse>>> {
-        return flow {
-            try {
-                val response = apiConfig.popularTvShow(API_KEY)
-                if (response.result.isNotEmpty()) {
-                    emit(ApiResponse.Success(response.result))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-    }
+//    fun getTvShow(): Flow<ApiResponse<List<TvShowDetailResponse>>> {
+//        return flow {
+//            try {
+//                val response = apiConfig.popularTvShow(API_KEY)
+//                if (response.result.isNotEmpty()) {
+//                    emit(ApiResponse.Success(response.result))
+//                } else {
+//                    emit(ApiResponse.Empty)
+//                }
+//            } catch (e: Exception) {
+//                emit(ApiResponse.Error(e.toString()))
+//            }
+//        }.flowOn(Dispatchers.IO)
+//    }
 
 //    fun getTvShowById(id: Int): Flow<ApiResponse<TvShowDetailResponse>> {
 //        return flow {
